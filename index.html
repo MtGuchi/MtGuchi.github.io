@@ -454,6 +454,7 @@
         .pubError {
             color: var(--muted);
             font-size: 13px;
+            word-break: break-word;
         }
 
         footer {
@@ -731,7 +732,6 @@
                 </p>
 
                 <div class="meta">
-                    <!-- Replace (at) with @ for actual mailto if you prefer -->
                     <a href="mailto:yamaguchi-s@hiroshima-cu.ac.jp" data-i18n="contact_mail">Mail</a>
                     <a href="https://orcid.org/0000-0002-6418-3964" target="_blank" rel="noreferrer">ORCID</a>
                     <a href="#" target="_blank" rel="noreferrer" data-i18n="contact_scholar">Scholar</a>
@@ -745,50 +745,60 @@
         </footer>
     </main>
 
-    <script>
-        // Theme
-        const root = document.documentElement;
-        const themeBtn = document.getElementById('themeBtn');
-        const themeMeta = document.getElementById('themeColorMeta');
-
-        function prefersLightNow() { return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches; }
-        function currentThemeResolved() {
-            const mode = root.getAttribute('data-theme') || 'auto';
-            if (mode === 'auto') return prefersLightNow() ? 'light' : 'dark';
-            return mode;
-        }
-        function updateThemeColorMeta() {
-            themeMeta.setAttribute('content', currentThemeResolved() === 'light' ? '#f6f7fb' : '#0b0f14');
-        }
-        function setThemeMode(mode) {
-            root.setAttribute('data-theme', mode);
-            localStorage.setItem('theme_mode', mode);
-            themeBtn.textContent = mode === 'auto' ? '🌓 Auto' : (mode === 'light' ? '☀️ Light' : '🌙 Dark');
-            updateThemeColorMeta();
-        }
-        setThemeMode(localStorage.getItem('theme_mode') || 'auto');
-
-        if (window.matchMedia) {
-            window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
-                if ((root.getAttribute('data-theme') || 'auto') === 'auto') updateThemeColorMeta();
-            });
-        }
-        themeBtn.addEventListener('click', () => {
-            const cur = root.getAttribute('data-theme') || 'auto';
-            const next = (cur === 'auto') ? 'dark' : (cur === 'dark' ? 'light' : 'auto');
-            setThemeMode(next);
-        });
-
-        document.getElementById('year').textContent = new Date().getFullYear();
-        document.getElementById('build').textContent =
-            new Date().toISOString().slice(0, 10) + " " + new Date().toTimeString().slice(0, 8);
-        document.getElementById('updatedDate').textContent = new Date().toISOString().slice(0, 10);
-    </script>
-
-    <!-- Language (JA/EN) -->
+    <!-- Theme (fixed: local root + safe init) -->
     <script>
         (() => {
-            const langBtn = document.getElementById("langBtn");
+            const root = document.documentElement;
+            const themeBtn = document.getElementById('themeBtn');
+            const themeMeta = document.getElementById('themeColorMeta');
+            if (!themeBtn || !themeMeta) return;
+
+            function prefersLightNow() {
+                return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+            }
+            function currentThemeResolved() {
+                const mode = root.getAttribute('data-theme') || 'auto';
+                if (mode === 'auto') return prefersLightNow() ? 'light' : 'dark';
+                return mode;
+            }
+            function updateThemeColorMeta() {
+                themeMeta.setAttribute('content', currentThemeResolved() === 'light' ? '#f6f7fb' : '#0b0f14');
+            }
+            function setThemeMode(mode) {
+                root.setAttribute('data-theme', mode);
+                localStorage.setItem('theme_mode', mode);
+                themeBtn.textContent = mode === 'auto' ? '🌓 Auto' : (mode === 'light' ? '☀️ Light' : '🌙 Dark');
+                updateThemeColorMeta();
+            }
+
+            setThemeMode(localStorage.getItem('theme_mode') || 'auto');
+
+      if (window.matchMedia) {
+                window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+                    if ((root.getAttribute('data-theme') || 'auto') === 'auto') updateThemeColorMeta();
+                });
+            }
+
+            themeBtn.addEventListener('click', () => {
+                const cur = root.getAttribute('data-theme') || 'auto';
+                const next = (cur === 'auto') ? 'dark' : (cur === 'dark' ? 'light' : 'auto');
+                setThemeMode(next);
+            });
+
+            const y = document.getElementById('year');
+            const b = document.getElementById('build');
+            const u = document.getElementById('updatedDate');
+            const now = new Date();
+            if (y) y.textContent = String(now.getFullYear());
+            if (b) b.textContent = now.toISOString().slice(0, 10) + " " + now.toTimeString().slice(0, 8);
+            if (u) u.textContent = now.toISOString().slice(0, 10);
+        })();
+    </script>
+
+    <!-- Language (JA/EN) (fixed: local root + DOMContentLoaded safe) -->
+    <script>
+        (() => {
+            const root = document.documentElement;
 
             const I18N = {
                 en: {
@@ -798,12 +808,12 @@
                     nav_pubs: "Publications",
                     nav_career: "Career",
                     nav_projects: "Projects",
-                    nav_contact: "Contact",
+                   nav_contact: "Contact",
                     btn_cv: "CV",
 
                     hero_line1: "Building robust",
                     hero_focus: "mobile sensing",
-                   hero_line2: " for real-world environments.",
+                    hero_line2: " for real-world environments.",
                     hero_lead: "My research focuses on mobile computing and sensing, including Wi-Fi sensing, localization, SLAM, and AR systems designed and evaluated for real deployments.",
 
                     kw_mobile: "Mobile computing",
@@ -818,37 +828,37 @@
                     box_now_label: "Now",
                     box_now_value: "Assistant Professor / Hiroshima City University (since Apr 2025)",
                     box_now_work: "Working on: <span class=\"mono\">mobile computing · sensing</span>",
-                    box_contact_label: "Contact",
+                   box_contact_label: "Contact",
                     box_contact_meta: "Japan",
 
                     about_h2: "About",
-                    about_hint: "Short and strong"
+                    about_hint: "Short and strong",
                     about_title: "Bio",
                     updated: "Updated",
-                    bio_p: "Shunpei Yamaguchi received B.E., M.E., and Ph.D. degrees from Osaka University in 2020, 2022, and 2025, respectively. He was a Research Fellow (DC1) of JSPS from 2022 to 2025, and a visiting scholar at the University of Copenhagen (Apr–Sep 2024) supported by the JSPS Overseas Challenge Program for Young Researchers. Since April 2025, he has been an assistant professor at Hiroshima City University. s research interests include mobile computing and sensing.",
+                    bio_p: "Shunpei Yamaguchi received B.E., M.E., and Ph.D. degrees from Osaka University in 2020, 2022, and 2025, respectively. He was a Research Fellow (DC1) of JSPS from 2022 to 2025, and a visiting scholar at the University of Copenhagen (Apr–Sep 2024) supported by the JSPS Overseas Challenge Program for Young Researchers. Since April 2025, he has been an assistant professor at Hiroshima City University. His research interests include mobile computing and sensing.",
                     bio_interest: "Affiliation: Hiroshima City University · Graduate School of Information Sciences",
                     bio_cv: "CV (PDF)",
                     bio_contact: "Contact",
 
                     pubs_h2: "Publications",
-                    pubs_hint: "Auto-generated from ./publication/*.bib",
+                    pubs_hint: "o-generated from ./publication/*.bib",
 
                     career_h2: "Career",
                     career_hint: "Selected positions and services",
-                   career_title: "Timeline",
+                    career_title: "Timeline",
                     career_edu: "Education & positions",
-                    career_edu_list: "<li>Apr 2025– : Assistant Professor, Hiroshima City University</li><li>Apr 2022–Mar 2025 : Ph.D. program, Graduate School of Information Science and Technology, Osaka University</li><li>Apr 2022–Mar 2025 : JSPS Research Fellow (DC1)</li><li>Apr 2024–Sep 2024 : Visiting Scholar, University of Copenhagen (JSPS Overseas Challenge Program for Young Researchers)</li><li>Apr 2022–Marrt-time lecturer (Information I), Kyoto Women's High School</li><li>May 2021–Mar 2022 : Student researcher, Sysmex Corporation</li><li>Mar 2022 : M.E., Osaka University</li><li>Mar 2020 : B.E., Osaka University</li>",
+                    career_edu_list: "<li>Apr 2025– : Assistant Professor, Hiroshima City University</li><li>Apr 2022–Mar 2025 : Ph.D. program, Graduate School of Information Science and Technology, Osaka University</li><li>Apr 2022–Mar 2025 : JSPS Reseallow (DC1)</li><li>Apr 2024–Sep 2024 : Visiting Scholar, University of Copenhagen (JSPS Overseas Challenge Program for Young Researchers)</li><li>Apr 2022–Mar 2023 : Part-time lecturer (Information I), Kyoto Women's High School</li><li>May 2021–Mar 2022 : Student researcher, Sysmex Corporation</li><li>Mar 2022 : M.E., Osaka University</li><li>Mar 2020 : B.E., Osaka University</li>",
                     career_service: "Service & activities",
-                    career_service_list: "<li>Jun 2023: Staff, JACUE 45th Annual Meeting</li><li>Mar 2021: Staff, IPSJ 83rd National Convention</li><li>Jun 2020: Staff, IPSJ DICOMO 2020 Symposium</li><li>Since Dec 2021: TA, Osaka Unersity SEEDS program</li><li>Since Jun 2017: Writer, Osaka University engineering blog</li><li>Apr–Sep 2023: Teaching Fellow, Probability & Statistics</li><li>Apr–Sep 2022: Teaching Fellow, Probability & Statistics</li>",
+                    career_service_list: "<li>Jun 2023: StafUE 45th Annual Meeting</li><li>Mar 2021: Staff, IPSJ 83rd National Convention</li><li>Jun 2020: Staff, IPSJ DICOMO 2020 Symposium</li><li>Since Dec 2021: TA, Osaka University SEEDS program</li><li>Since Jun 2017: Writer, Osaka University engineering blog</li><li>Apr–Sep 2023: Teaching Fellow, Probability & Statistics</li><li>Apr–Sep 2022: Teaching Fellow, Probability & Statistics</li>",
                     career_qual: "Qualifications",
-                    career_qual_list: "<li>Mar 2024: Completed Advanced Sub-Program (Faculty Development)</li><li>Mar 2022: Secondary school teaching license (Math/Information)</li><li>Jun 2021: TOEIC L&amp;R 815</li><li>Mar 2019: Compd enPiT-Security (SecCap 8)</li><li>Nov 2017: Driver’s license (AT)</li>",
+                    career_qual_list: "<li>Mar 2024: Completed Adva Sub-Program (Faculty Development)</li><li>Mar 2022: Secondary school teaching license (Math/Information)</li><li>Jun 2021: TOEIC L&amp;R 815</li><li>Mar 2019: Completed enPiT-Security (SecCap 8)</li><li>Nov 2017: Driver’s license (AT)</li>",
 
                     projects_h2: "Projects",
                     projects_hint: "Add as needed",
                     proj_name: "(Example) Wi-Fi sensing × AR",
-                    proj_p: "I build and evaluate systems that connect Wi-Fi sensing with localization and AR applications, aiming for robustness in real environments and reproducible artifacts (code/data/experiments).",
+                    proj_p: "I build and evaluate systems that connect Wi-Fi sensing with localization anR applications, aiming for robustness in real environments and reproducible artifacts (code/data/experiments).",
                     proj_repo: "Repository",
-                 proj_demo: "Demo",
+                    proj_demo: "Demo",
                     proj_tech: "Tech: Python / ROS 2 / Embedded",
 
                     contact_h2: "Contact",
@@ -861,20 +871,24 @@
                     contact_scholar: "Scholar"
                 },
                 ja: {
-                    // Japanese is the in-page original; keep minimal (button label handled below)
+                    // Japanese is the in-page original; stored automatically on first run
                 }
             };
 
             function applyLang(lang) {
                 root.setAttribute("data-lang", lang);
                 root.setAttribute("lang", lang === "en" ? "en" : "ja");
-                langBtn.textContent = (lang === "en") ? "🌐 English" : "🌐 日本語";
 
-                const dict = I18N[lang]              document.querySelectorAll("[data-i18n]").forEach(el => {
+                const langBtn = document.getElementById("langBtn");
+                if (langBtn) langBtn.textContent = (lang === "en") ? "🌐 English" : "🌐 日本語";
+
+                const dict = I18N[lang] || {};
+                document.querySelectorAll("[data-i18n]").forEach(el => {
                     const key = el.getAttribute("data-i18n");
                     if (!key) return;
 
-                    if (!el.hasAttribute("data-i18n-ja")) el.setAttribute("data-i18n-ja", el.innerHTML);
+                    // store JA once
+                    if (!el.hasAttribute("data-i18n-etAttribute("data-i18n-ja", el.innerHTML);
 
                     if (lang === "en") {
                         if (dict[key] != null) el.innerHTML = dict[key];
@@ -886,356 +900,386 @@
                 localStorage.setItem("site_lang", lang);
             }
 
-            const saved = localStorage.getItem("site_lang");
-            applyLang(saved === "en" ? "en" : "ja");
+            function initLang() {
+                const langBtn = document.getElementById("langBtn");
+                if (!langBtn) return;
 
-            langBtn.addEventListener("click", () => {
-                const cur = root.getAttribute("data-lang") || "ja";
-                applyLang(cur === "ja" ? "en" : "ja");
-            });
+                const saved = localStorage.getItem("site_lang");
+                applyLang(saved === "en" ? "en" : "ja");
+
+                langBtn.addEventListener("click", () => {
+                    const cur = root.getAttribute("data-lang") || "ja";
+                    applyLang(cur === "ja" ? "en" : "ja");
+                });
+            }
+
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", initLang);
+            } else {
+                initLang();
+            }
         })();
     </script>
 
-    <!-- Publications (BibTeX) -->
+    <!-- Publications (BibTeX) (fixed: never-stuck loading + timeout + error display) -->
     <script>
         (() => {
-            const PUB_FILES = [
-                "./publication/journal.bib",
-                "./publication/conference.bib",
-                "./publication/symposium.bib",
-                "./publication/domestic.bib",
-                "./publication/award.bib",
-                "./publication/patent.bib",
-                "./publication/others.bib",
-            ];
+            function initPubs() {
+                const PUB_FILES = [
+                    "./publication/journal.bib",
+                    "./publication/conference.bib",
+                    "./publication/symposium.bib",
+                    "./publication/domestic.bib",
+                    "./publication/award.bib",
+                    "./publication/patent.bib",
+                    "./publication/others.bib",
+                ];
 
-            const statusEl = document.getElementById("pubStatus");
-            const errorEl = document.getElementById("pubError");
+                const statusEl = document.getElementById("pubStatus");
+                const errorEl = document.getElementById("pubError");
 
-            const listEls = {
-                journal: document.getElementById("pub-journal"),
-                conference: document.getElementById("pub-conference"),
-                symposium: document.getElementById("pub-symposium"),
-                domestic: document.getElementById("pub-domestic"),
-                award: document.getElementById("pub-award"),
-                patent: document.getElementById("pub-patent"),
-                others: document.getElementById("pub-others"),
-            };
-
-            if (!statusEl || !errorEl || Object.values(listEls).some(v => !v)) return;
-
-            function escapeHtml(s) {
-                return (s ?? "")
-                    .replaceAll("&", "&amp;")
-                    .replaceAll("<", "&lt;")
-                    .replaceAll(">", "&gt;")
-                    .replaceAll('"', "&quot;")
-                    .replaceAll("'", "&#039;");
-            }
-
-            function typographicFix(s) { return (s ?? "").replaceAll("--", "–"); }
-
-            function latexLightNormalize(s{
-                let x = (s ?? "").trim();
-                if (!x) return x;
-                x = x.replaceAll("~", " ");
-                x = x.replace(/\s+/g, " ").trim();
-                return x;
-            }
-
-            function fmtAuthors(s) {
-                const x = latexLightNormalize(s);
-                return typographicFix(x).replace(/\s+and\s+/gi, ", ");
-            }
-
-            function stripComments(s) {
-                const lines = s.split(/\r?\n/);
-                const out = [];
-                for (const line of lines) {
-                    let acc = "";
-                    let escaped = false;
-                    for (let i = 0; i < line.length; i++) {
-                        const ch = line[i];
-                        if (ch === "\\" && !escaped) { escaped = true; acc += ch; continue; }
-                        if (ch === "%" && !escaped) break;
-                        escaped = false;
-                        acc += ch;
-                    }
-                    out.push(acc);
-                }
-                return out.join("\n");
-            }
-
-            function yearNum(s) {
-                const m = (s || "").match(/\d{4}/);
-                return m ? parseInt(m[0], 10) : -1;
-            }
-
-            function makeLi(html, id) {
-                const li = document.createElement("li");
-                if (id) li.id = id;
-                li.innerHTML = html;
-                return li;
-            }
-
-            function stripOuterBraces(v) {
-                let s = (v ?? "").trim();
-                if (!s) return s;
-
-                if (s.startsWith('"') && s.endsWith('"')) return s.slice(1, -1).trim();
-
-                if (s.startsWith("{") && s.endsWith("}")) {
-                    let depth = 0;
-                    for (let i = 0; i < s.length; i++) {
-                        const ch = s[i];
-                        if (ch === "{") depth++;
-                        else if (ch === "}") depth--;
-                        if (depth === 0 && i !== s.length - 1) return s; // e.g., {a} # {b}
-                    }
-                    return s.slice(1, -1).trim();
-                }
-                return s;
-            }
-
-            function splitTopLevel(s, sepChar) {
-                const parts = [];
-                let buf = "";
-                let depth = 0;
-                let inQuote = false;
-                let esc = false;
-
-                for (let i = 0; i < s.length; i++) {
-                    const ch = s[i];
-                    if (esc) { buf += ch; esc = false; continue; }
-                    if (ch === "\\") { buf += ch; esc = true; continue; }
-
-                    if (ch === '"') { inQuote = !inQuote; buf += ch; continue; }
-                    if (!inQuote) {
-                        if (ch === "{") depth++;
-                        else if (ch === "}") depth = Math.max(0, depth - 1);
-                        if (depth === 0 && ch === sepChar) {
-                            parts.push(buf);
-                            buf = "";
-                            continue;
-                        }
-                    }
-                    buf += ch;
-                }
-                if (buf.trim() !== "") parts.push(buf);
-                return parts;
-            }
-
-            function parseBibTeX(text) {
-                const t = stripComments(text || "");
-                const entries = [];
-                let i = 0;
-
-                while (i < t.length) {
-                    const at = t.indexOf("@", i);
-                    if (at === -1) break;
-                    const brace = t.indexOf("{", at);
-                    if (brace === -1) break;
-
-                    const type = t.slice(at + 1, brace).trim().toLowerCase();
-
-                    let depth = 0;
-                    let j = brace;
-                    for (; j < t.length; j++) {
-                        const ch = t[j];
-                        if (ch === "{") depth++;
-                        else if (ch === "}") depth--;
-                        if (depth === 0) break;
-                    }
-                    if (depth !== 0) break;
-
-                    const bodyAll = t.slice(brace + 1, j).trim();
-                    const comma = bodyAll.indexOf(",");
-                    if (comma === -1) { i = j + 1; continue; }
-
-                    const key = bodyAll.slice(0, comma).trim();
-                    const body = bodyAll.slice(comma + 1).trim();
-
-                    const fields = {};
-                    const chunks = splitTopLevel(body, ",");
-                    for (const chunkRaw of chunks) {
-                        const chunk = chunkRaw.trim();
-                        if (!chunk) continue;
-                        const eq = chunk.indexOf("=");
-                        if (eq === -1) continue;
-                        const name = chunk.slice(0, eq).trim().toLowerCase();
-                        let val = chunk.slice(eq + 1).trim();
-                        val = stripOuterBraces(val);
-                        fields[name] = val;
-                    }
-
-                    entries.push({ type, key, fields });
-                    i = j + 1;
-                }
-
-                return entries;
-            }
-
-            function fieldAny(f, keys) {
-                for (const k of keys) {
-                    const v = f[k];
-                    if (v && String(v).trim() !== "") return String(v).trim();
-                }
-                return "";
-            }
-
-            function linkPartFor(f) {
-                const url = latexLightNormalize(fieldAny(f, ["url"]));
-                const doi = latexLightNormalize(fieldAny(f, ["doi"]));
-                if (url) return ` <span class="pubMeta"><a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Link</a></span>`;
-                if (doi) return ` <span class="pubMeta"><a href="https://doi.org/${escapeHtml(doi)}" target="_blank" rel="noreferrer">DOI</a></span>`;
-                return "";
-            }
-
-            function notePartFor(f) {
-                const noteRaw = latexLightNormalize(fieldAny(f, ["note"]));
-                const note = typographicFix(noteRaw);
-                if (!note) return "";
-                if (/peer\s*-?\s*review/i.test(note)) return "";
-                return ` (${escapeHtml(note)})`;
-            }
-
-            function fmtJournal(e) {
-                const f = e.fields;
-                const authors = fmtAuthors(fieldAny(f, ["author", "authors"]));
-                const title = typographicFix(latexLightNormalize(stripOuterBraces(fieldAny(f, ["title"]))));
-                const venue = typographicFix(latexLightNormalize(fieldAny(f, ["journal", "booktitle"])));
-                const vol = typographicFix(latexLightNormalize(fieldAny(f, ["volume", "vol"])));
-                const no = typographicFix(latexLightNormalize(fieldAny(f, ["number", "no"])));
-                const pages = typographicFix(latexLightNormalize(fieldAny(f, ["pages", "page"])));
-                const year = typographicFix(latexLightNormalize(fieldAny(f, ["year", "date"])));
-
-                const noPart = no ? `, no.&nbsp;${escapeHtml(no)}` : "";
-                const notePart = notePartFor(f);
-                const linkPart = linkPartFor(f);
-
-                const html =
-                    `${escapeHtml(authors)}` +
-                    (title ? `, “${escapeHtml(title)},”` : ",") +
-                    (venue ? ` <i>${escapeHtml(venue)}</i>` : "") +
-                    (vol ? `, vol.&nbsp;${escapeHtml(vol)}` : "") +
-                    (vol ? noPart : "") +
-                    (pages ? `, pp.&nbsp;${escapeHtml(pages)}` : "") +
-                    (year ? `, ${escapeHtml(year)}` : "") +
-                `${notePart}.` +
-                    linkPart;
-
-                return { html, id: e.key || "", y: yearNum(year) };
-            }
-
-            function fmtConference(e) {
-                const f = e.fields;
-                const authors = fmtAuthors(fieldAny(f, ["author", "authors"]));
-                const title = typographicFix(latexLightNormalize(stripOuterBraces(fieldAny(f, ["title"]))));
-                const venue = typographicFix(latexLightNormalize(fieldAny(f, ["booktitle", "journal"])));
-                const pages = typographicFix(latexLightNormalize(fieldAny(f, ["pages", "page"])));
-                const year = typographicFix(latexLightNormalize(fieldAny(f, ["year", "date"])));
-
-                const notePart = notePartFor(f);
-                const linkPart = linkPartFor(f);
-
-                const html =
-                    `${escapeHtml(authors)}` +
-                    (title ? `, “${escapeHtml(title)},”` : ",") +
-                    (venue ? ` <i>${escapeHtml(venue)}</i>` : "") +
-                (pages ? `, pp.&nbsp;${escapeHtml(pages)}` : "") +
-                    (year ? `, ${escapeHtml(year)}` : "") +
-                    `${notePart}.` +
-                    linkPart;
-
-                return { html, id: e.key || "", y: yearNum(year) };
-            }
-
-            function fmtGeneric(e) {
-                const f = e.fields;
-                const authors = fmtAuthors(fieldAny(f, ["author", "authors"]));
-                const title = typographicFix(latexLightNormalize(stripOuterBraces(fieldAny(f, ["title"]))));
-                const where = typographicFix(latexLightNormalize(fieldAny(f, ["howpublished", "booktitle", "journal"])));
-                const year = typographicFix(latexLightNormalize(fieldAny(f, ["year", "date"])));
-
-                const notePart = notePartFor(f);
-                const linkPart = linkPartFor(f);
-
-                const html =
-                    `${escapeHtml(authors)}` +
-                    (title ? `, “${escapeHtml(title)}”` : "") +
-                    (where ?${escapeHtml(where)}` : "") +
-                    (year ? `, ${escapeHtml(year)}` : "") +
-                    `${notePart}.` +
-                    linkPart;
-
-                return { html, id: e.key || "", y: yearNum(year) };
-            }
-
-            async function loadAllPublications() {
-                statusEl.textContent = "Loading…";
-                errorEl.style.display = "none";
-                for (const k of Object.keys(listEls)) listEls[k].innerHTML = "";
-
-                const fetched = [];
-              const failures = [];
-
-                for (const path of PUB_FILES) {
-                    try {
-                        const r = await fetch(path, { cache: "no-store" });
-                        if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
-                        fetched.push({ path, text: await r.text() });
-                    } catch (e) {
-                        failures.push({ path, err: String(e) });
-                    }
-                }
-
-                const groups = { journal: [], conference: [], symposium: [], domestic: [], award: [], patent: [], others: [] };
-
-                for (const f of fetched) {
-                    const entries = parseBibTeX(f.text);
-
-                    if (/journal\.bib$/i.test(f.path)) for (const e of entries) groups.journal.push(fmtJournal(e));
-                    else if (/conference\.bib$/i.test(f.path)) for (const e of entries) groups.conference.push(fmtConference(e));
-                    else if (/symposium\.bib$/i.test(f.path)) for (const e of entries) groups.symposium.push(fmtGeneric(e));
-                    else if (/domestic\.bib$/i.test(f.path)) for (const e of entries) groups.domestic.push(fmtGeneric(e));
-                    else if (/award\.bib$/i.test(f.path)) for (const e of entries) groups.award.push(fmtGeneric(e));
-                    else if (/patent\.bib$/i.test(f.path)) for (const e of entries) groups.patent.push(fmtGeneric(e));
-                    else if (/others\.bib$/i.test(f.path)) for (const e of entries) groups.others.push(fmtGeneric(e));
-                }
-
-                for (const key of Object.keys(groups)) groups[key].sort((a, b) => b.y - a.y);
-
-                const renderInto = (key) => {
-                    const el = listEls[key];
-                    const arr = groups[key];
-                    if (!arr || arr.length === 0) {
-                        el.appendChild(makeLi(`<span class="pubMeta">—</span><span class="pubMeta">No entries</span>`, ""));
-                        return;
-                    }
-                  for (const it of arr) el.appendChild(makeLi(it.html, it.id));
+                const listEls = {
+                    journal: document.getElementById("pub-journal"),
+                    conference: document.getElementById("pub-conference"),
+                    symposium: document.getElementById("pub-symposium"),
+                    domestic: document.getElementById("pub-domestic"),
+                    award: document.getElementById("pub-award"),
+                    patent: document.getElementById("pub-patent"),
+                    others: document.getElementById("pub-others"),
                 };
 
-                renderInto("journal");
-                renderInto("conference");
-                renderInto("symposium");
-                renderInto("domestic");
-                renderInto("award");
-                renderInto("patent");
-                renderInto("others");
+                if (!statusEl || !errorEl || Object.values(listEls).some(v => !v)) return;
 
-                statusEl.textContent = `Loaded ${fetched.length} file(s)` + (failures.length ? `, failed ${failures.length}.` : ".");
-                if (failures.length) {
-                    errorEl.style.display = "block";
-                    errorEl.textContent = failures.map(x => `${x.path}: ${x.err}`).join(" / ");
+                function escapeHtml(s) {
+                    return (s ?? "")
+                        .replaceAll("&", "&amp;")
+                        .replaceAll("<", "&lt;")
+                        .replaceAll(">", "&gt;")
+                        .replaceAll('"', "&quot;")
+                        .replaceAll("'", "&#039;");
                 }
+
+                function typographicFix(s) { return (s ?? "").replaceAll("--", "–"); }
+
+                function latexLightNormalize(s) {
+                    let x = (s ?? "").trim();
+                    if (!x) return x;
+                    x = x.replaceAll("~", " ");
+                    x = x.rlace(/\s+/g, " ").trim();
+                    return x;
+                }
+
+                function fmtAuthors(s) {
+                    const x = latexLightNormalize(s);
+                    return typographicFix(x).replace(/\s+and\s+/gi, ", ");
+                }
+
+                function stripComments(s) {
+                    const lines = s.split(/\r?\n/);
+                    const out = [];
+                    for (const line of lines) {
+                        let acc = "";
+                        let escaped = false;
+                        for (let i = 0; i < line.length; i++) {
+                            const ch = line[i];
+                            if (ch === "\\" && !escaped) { escaped = true; acc += ch; continue; }
+                            if (ch === "%" && !escaped) break;
+                            escaped = false;
+                            acc += ch;
+                        }
+                        out.push(acc);
+                    }
+                    return out.join("\n");
+                }
+
+                function yearNum(s) {
+                    const m = (s || "").match(/\d{4}/);
+                    return m ? parseInt(m[0], 10) : -1;
+                }
+
+                function makeLi(html, id) {
+                    const li = document.createElement("li");
+                    if (id) li.id = id;
+                    li.innerHTML = html;
+                    return li;
+                }
+
+                function stripOuterBraces(v) {
+                    let s = (v ?? "").trim();
+                    if (!s) return s;
+
+                    if (s.startsWith('"') && s.endsWith('"')) return s.slice(1, -1).trim();
+
+                    if (s.startsWith("{") && s.endsWith("}")) {
+                        let depth = 0;
+                        for (let i = 0; i < s.length; i++) {
+                            const ch = s[i];
+                            if (ch === "{") depth++;
+                            else if (ch === "}") depth--;
+                            if (depth === 0 && i !== s.length - 1) return s; // e.g., {a} # {b}
+                        }
+                        return s.slice(1, -1).trim();
+                    }
+                    return s;
+                }
+
+                function splitTopLevel(s, sepChar) {
+                    const parts = [];
+                    let buf = "";
+                    let depth = 0;
+                    let inQuote = false;
+                    let esc = false;
+
+                    for (let i = 0; i < s.length; i++) {
+                        const ch = s[i];
+                        if (esc) { buf += ch; esc = false; continue; }
+                        if (ch === "\\") { buf += ch; esc = true; continue; }
+
+                        if (ch === '"') { inQuote = !inQuote; buf += ch; continue; }
+                        if (!inQuote) {
+                            if (ch === "{") depth++;
+                            else if (ch === "}") depth = Math.max(0, depth - 1);
+                            if (depth === 0 && ch === sepChar) {
+                                parts.push(buf);
+                                buf = "";
+                                continue;
+                            }
+                        }
+                        buf += ch;
+                    }
+                    if (buf.trim() !== "") parts.push(buf);
+                    return parts;
+                }
+
+                function parseBibTeX(text) {
+                    const t = stripComments(text || "");
+                    const entries = [];
+                    let i = 0;
+
+                    while (i < t.length) {
+                        const at = t.indexOf("@", i);
+                        if (at === -1) break;
+                        const brace = t.indexOf("{", at);
+                        if (brace === -1) break;
+
+                        const type = t.slice(at + 1, brace).trim().toLowerCase();
+
+                        let depth = 0;
+                        let j = brace;
+                        for (; j < t.length; j++) {
+                            const ch = t[j];
+                            if (ch === "{") depth++;
+                            else if (ch === "}") depth--;
+                            if (depth === 0) break;
+                        }
+                        if (depth !== 0) break;
+
+                        const bodyAll = t.slice(brace + 1, j).trim();
+                        const comma = bodyAll.indexOf(",");
+                        if (comma === -1) { i = j + 1; continue; }
+
+                        const key = bodyAll.slice(0, comma).trim();
+                        const body = bodyAll.slice(comma + 1).trim();
+
+                        const fields = {};
+                        const chunks = splitTopLevel(body, ",");
+                        for (const chunkRaw of chunks) {
+                            const chunk = chunkRaw.trim();
+                            if (!chunk) continue;
+                            const eq = chunk.indexOf("=");
+                            if (eq === -1) continue;
+                            const name = chunk.slice(0, eq).trim().toLowerCase();
+                            let val = chunk.slice(eq + 1).trim();
+                            val = stripOuterBraces(val);
+                            fields[name] = val;
+                        }
+
+                        entries.push({ type, key, fields });
+                        i = j + 1;
+                    }
+
+                    return entries;
+                }
+
+                function fieldAny(f, keys) {
+                    for (const k of keys) {
+                        const v = f[k];
+                        if (v && String(v).trim() !== "") return String(v).trim();
+                    }
+                    return "";
+                }
+
+                function linkPartFor(f) {
+                    const url = latexLightNormalize(fieldAny(f, ["url"]));
+                    const doi = latexLightNormalize(fieldAny(f, ["doi"]));
+                    if (url) return ` <span class="pubMeta"><a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Link</a></span>`;
+                    if (doi) return ` <span class="pubMeta"><a href="https://doi.org/${escapeHtml(doi)}" target="_blank" rel="noreferrer">DOI</a></span>`;
+                    return "";
+                }
+
+                function notePartFor(f) {
+                    const noteRaw = latexLightNormalize(fieldAny(f, ["note"]));
+                    const note = typographicFix(noteRaw);
+                    if (!note) return "";
+                    if (/peer\s*-?\s*review/i.test(note)) return "";
+                    return ` (${escapeHtml(note)})`;
+                }
+
+                function fmtJournal(e) {
+                    const f = e.fields;
+                    const authors = fmtAuthors(fieldAny(f, ["author", "authors"]));
+                    const title = typographicFix(latexLightNormalize(stripOuterBraces(fieldAny(f, ["title"]))));
+                    const venue = typographicFix(latexLightNormalize(fieldAny(f, ["journal", "booktitle"])));
+                    const vol = typographicFix(latexLightNormalize(fieldAny(f, ["volume", "vol"])));
+                    const no = typographicFix(latexLightNormalize(fieldAny(f, ["number", "no"])));
+                    const pages = typographicFix(latexLightNormalize(fieldAny(f, ["pages", "page"])));
+                    const year = typographicFix(latexLightNormalize(fieldAny(f, ["year", "date"])));
+
+                    const noPart = (vol && no) ? `, no.&nbsp;${escapeHtml(no)}` : "";
+                    const notePart = notePartFor(f);
+                    const linkPart = linkPartFor(f);
+
+                    const html =
+                        `${escapeHtml(authors)}` +
+                        (title ? `, “${escapeHtml(title)},”` : ",") +
+                        (venue ? ` <i>${escapeHtml(venue)}</i>` : "") +
+                        (vol ? `, vol.&nbsp;${escapeHtml(vol)}` : "") +
+                        (vol ? noPart : "") +
+                        (pages ? `, pp.&nbsp;${escapeHtml(pages)}` : "") +
+                        (year ? `, ${escapeHtml(year)}` : "") +
+                        `${notePart}.                        linkPart;
+
+                    return { html, id: e.key || "", y: yearNum(year) };
+                }
+
+                function fmtConference(e) {
+                    const f = e.fields;
+                    const authors = fmtAuthors(fieldAny(f, ["author", "authors"]));
+                    const title = typographicFix(latexLightNormalize(stripOuterBraces(fieldAny(f, ["title"]))));
+                    const venue = typographicFix(latexLightNormalize(fieldAny(f, ["booktitle", "journal"])));
+                    const pages = typographicFix(latexLightNormalize(fieldAny(f, ["pages", "page"])));
+                    const year = typographicFix(latexLightNormalize(fieldAny(f, ["year", "date"])));
+
+                    const notePart = notePartFor(f);
+                    const linkPart = linkPartFor(f);
+
+                    const html =
+                        `${escapeHtml(authors)}` +
+                        (title ? `, “${escapeHtml(title)},”` : ",") +
+                        (venue ? ` <iscapeHtml(venue)}</i>` : "") +
+                        (pages ? `, pp.&nbsp;${escapeHtml(pages)}` : "") +
+                        (year ? `, ${escapeHtml(year)}` : "") +
+                        `${notePart}.` +
+                        linkPart;
+
+                    return { html, id: e.key || "", y: yearNum(year) };
+                }
+
+                function fmtGeneric(e) {
+                    const f = e.fields;
+                    const authors = fmtAuthors(fieldAny(f, ["author", "authors"]));
+                    const title = typographicFix(latexLightNormalize(stripOuterBraces(fieldAny(f, ["title"]))));
+                    const where = typographicFix(latexLightNormalize(fieldAny(f, ["howpublished", "booktitle", "journal"])));
+                    const year = typographicFix(latexLightNormalize(fieldAny(f, ["year", "date"])));
+
+                    const notePart = notePartFor(f);
+                    const linkPart = linkPartFor(f);
+
+                    const html =
+                        `${escapeHtml(authors)}` +
+                        (title ? `, “${escapeHtml(title)}”` : "") +
+                        (where ? `, ${escapeHtml(where)}` : "") +
+                        (year ? `, ${escapeHtml(year)}` : "") +
+                        `${notePart}.` +
+                        linkPart;
+
+                    return { html, id: e.key || "", y: yearNum(year) };
+                }
+
+                async function fetchWithTimeout(url, ms) {
+                    const ctrl = new AbortController();
+                  nst timer = setTimeout(() => ctrl.abort(), ms);
+                    try {
+                        const r = await fetch(url, { cache: "no-store", signal: ctrl.signal });
+                        return r;
+                    } finally {
+                        clearTimeout(timer);
+                    }
+                }
+
+                async function loadAllPublications() {
+                    statusEl.textContent = "Loading…";
+                    errorEl.style.display = "none";
+                    errorEtextContent = "";
+                    for (const k of Object.keys(listEls)) listEls[k].innerHTML = "";
+
+                    const fetched = [];
+                    const failures = [];
+
+                    for (const path of PUB_FILES) {
+                        try {
+                            const r = await fetchWithTimeout(path, 8000);
+                            if (!r || !r.ok) throw new Error(r ? `${r.status} ${r.statusText}` : "fetch failed");
+                            fetched.push({ path, text: await r.text() });
+                        } catch (e) {
+                            failures.push({ path, err: String(e) });
+                        }
+                    }
+
+                    const groups = { journal: [], conference: [], symposium: [], domestic: [], award: [], patent: [], others: [] };
+
+                    for (const f of fetched) {
+                        const entries = parseBibTeX(f.text);
+
+                        if (/journal\.bib$/i.test(f.path)) for (const e of entries) groups.journal.push(fmtJournal(e));
+                        else if (/conference\.bib$/i.test(f.path)) for (const e of entries) groups.conference.push(fmtConference(e));
+                        else if (/symposium\.bib$/i.test(f.path)) for (const e of entries) groups.symposium.push(fmtGeneric(e));
+                        else if (/domestic\.bib$/i.test(f.path)) for (const e of entries) groups.domestic.push(fmtGeneric(e));
+                        else if (/award\.bib$/i.test(f.path)) for (const e of entries) groups.award.push(fmtGeneric(e));
+                        else if (/patent\.bib$/i.test(f.path)) for (const e of entries) groups.patent.push(fmtGeneric(e));
+                        else if (/others\.bib$/i.test(f.path)) for (const e of entries) groups.others.push(fmtGeneric(e));
+                    }
+
+                    for (const key of Object.keys(groups)) groups[key].sort((a, b) => b.y - a.y);
+
+                    const renderInto = (key) => {
+                        const el = listEls[key];
+                        const arr = groups[key];
+                        if (!arr || arr.length === 0) {
+                            el.appendChild(makeLi(`<span class="pubMeta">—</span><span class="pubMeta">No entries</span>`, ""));
+                            return;
+                        }
+                        for (const it of arr) el.appendChild(makeLi(it.html, it.id));
+                    };
+
+                    renderInto("journal");
+                    renderInto("conference");
+                    renderInto("sympoum");
+                    renderInto("domestic");
+                    renderInto("award");
+                    renderInto("patent");
+                    renderInto("others");
+
+                    statusEl.textContent = `Loaded ${fetched.length} file(s)` + (failures.length ? `, failed ${failures.length}.` : ".");
+                    if (failures.length) {
+                        errorEl.style.display = "block";
+                        errorEl.textContent = failures.map(x => `${x.path}: ${x.err}`).join(" / ");
+                    }
+                }
+
+                loadAllPublications().catch((e) => {
+                    statusEl.textContent = "Failed.";
+                    errorEl.style.display = "block";
+                    errorEl.textContent = "JS exception / " + String(e);
+                    try { console.error(e); } catch { }
+                });
             }
 
-            loadAllPublications().catch((e) => {
-                statusEl.textContent = "Failed.";
-                errorEl.style.display = "block";
-                errorEl.textContent = "JS exception / " + String(e);
-                try { console.error(e); } catch { }
-            });
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", initPubs);
+            } else {
+                initPubs();
+            }
         })();
     </script>
 </body>
