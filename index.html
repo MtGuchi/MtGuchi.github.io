@@ -1,1288 +1,1018 @@
 <!doctype html>
 <html lang="ja" data-theme="auto" data-lang="ja">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="山口隼平（Shunpei Yamaguchi）の研究者向け個人ページ" />
-    <meta name="theme-color" content="#0b0f14" id="themeColorMeta" />
-    <title>Shunpei Yamaguchi — Research</title>
-
-    <style>
-        html {
-            color-scheme: light dark;
-        }
-
-        html[data-theme="dark"] {
-            color-scheme: dark;
-        }
-
-        html[data-theme="light"] {
-            color-scheme: light;
-        }
-
-        :root {
-            --bg: #0b0f14;
-            --panel: rgba(255, 255, 255, .06);
-            --text: rgba(255, 255, 255, .88);
-            --muted: rgba(255, 255, 255, .62);
-            --muted2: rgba(255, 255, 255, .45);
-            --border: rgba(255, 255, 255, .12);
-            --shadow: 0 18px 60px rgba(0, 0, 0, .45);
-            --accent: #7c5cff;
-            --accent2: #23d5ab;
-            --ring: rgba(124, 92, 255, .35);
-            --link: rgba(255, 255, 255, .88);
-            --linkHover: #fff;
-            --radius: 18px;
-            --max: 1040px;
-            --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-        }
-
-        @media (prefers-color-scheme: light) {
-            html[data-theme="auto"] {
-                --bg: #f6f7fb;
-                --panel: rgba(0, 0, 0, .04);
-                --text: rgba(0, 0, 0, .86);
-                --muted: rgba(0, 0, 0, .62);
-                --muted2: rgba(0, 0, 0, .45);
-                --border: rgba(0, 0, 0, .10);
-                --shadow: 0 18px 60px rgba(20, 20, 50, .12);
-                --link: rgba(0, 0, 0, .86);
-                --linkHover: #000;
-                --ring: rgba(124, 92, 255, .25);
-            }
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: var(--sans);
-            color: var(--text);
-            background:
-                radial-gradient(1200px 700px at 15% 10%, rgba(124, 92, 255, .18), transparent 55%),
-                radial-gradient(900px 600px at 85% 20%, rgba(35, 213, 171, .14), transparent 60%),
-                radial-gradient(800px 500px at 65% 85%, rgba(124, 92, 255, .10), transparent 60%),
-                var(--bg);
-            line-height: 1.6;
-            letter-spacing: .1px;
-            overflow-x: hidden;
-        }
-
-        a {
-            color: var(--link);
-            text-decoration: none;
-        }
-
-        a:hover {
-            color: var(--linkHover);
-        }
-
-        .wrap {
-            max-width: var(--max);
-            margin: 0 auto;
-            padding: 28px 18px 80px;
-        }
-
-        .top {
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            background: linear-gradient(to bottom, rgba(10, 12, 16, .82), rgba(10, 12, 16, .35));
-            border-bottom: 1px solid var(--border);
-        }
-
-        @media (prefers-color-scheme: light) {
-            html[data-theme="auto"] .top {
-                background: linear-gradient(to bottom, rgba(246, 247, 251, .90), rgba(246, 247, 251, .55));
-            }
-        }
-
-        .top .inner {
-            max-width: var(--max);
-            margin: 0 auto;
-            padding: 12px 18px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 240px;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 999px;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
-            box-shadow: 0 0 0 6px rgba(124, 92, 255, .12);
-        }
-
-        .brand .name {
-            font-weight: 650;
-        }
-
-        .brand .sub {
-            font-size: 12px;
-            color: var(--muted);
-            margin-top: -2px;
-        }
-
-        nav {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .chip {
-            font-size: 13px;
-            padding: 8px 10px;
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            background: rgba(255, 255, 255, .02);
-            transition: transform .18s ease, background .18s ease, border-color .18s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        @media (prefers-color-scheme: light) {
-            html[data-theme="auto"] .chip {
-                background: rgba(0, 0, 0, .02);
-            }
-        }
-
-        .chip:hover {
-            transform: translateY(-1px);
-            background: var(--panel);
-            border-color: rgba(124, 92, 255, .35);
-        }
-
-        .right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 240px;
-            justify-content: flex-end;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            appearance: none;
-            border: 1px solid var(--border);
-            background: var(--panel);
-            color: var(--text);
-            padding: 9px 12px;
-            border-radius: 999px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: transform .18s ease, border-color .18s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-1px);
-            border-color: rgba(124, 92, 255, .35);
-        }
-
-        .btn:focus {
-            outline: none;
-            box-shadow: 0 0 0 4px var(--ring);
-        }
-
-        .hero {
-            padding: 46px 0 20px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1.3fr .7fr;
-            gap: 18px;
-            align-items: stretch;
-        }
-
-        @media (max-width:880px) {
-            .grid {
-                grid-template-columns: 1fr;
-            }
-
-            .brand,
-            .right {
-                min-width: auto;
-            }
-
-            nav {
-                display: none;
-            }
-        }
-
-        .card {
-            background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .04));
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        @media (prefers-color-scheme: light) {
-            html[data-theme="auto"] .card {
-                background: linear-gradient(180deg, rgba(0, 0, 0, .03), rgba(0, 0, 0, .02));
-            }
-        }
-
-        .pad {
-            padding: 22px;
-        }
-
-        .kicker {
-            font-family: var(--mono);
-            font-size: 12px;
-            color: var(--muted);
-            letter-spacing: .6px;
-            text-transform: uppercase;
-        }
-
-        h1 {
-            margin: 10px 0 12px;
-            font-size: clamp(28px, 4.2vw, 44px);
-            letter-spacing: -.6px;
-            line-height: 1.15;
-        }
-
-        .lead {
-            color: var(--muted);
-            font-size: 15.5px;
-            max-width: 66ch;
-        }
-
-        .pillrow {
-            margin-top: 16px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .pill {
-            border-radius: 999px;
-            padding: 8px 10px;
-            font-size: 12.5px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, .03);
-            color: var(--muted);
-        }
-
-        @media (prefers-color-scheme: light) {
-            html[data-theme="auto"] .pill {
-                background: rgba(0, 0, 0, .02);
-            }
-        }
-
-        .mini {
-            display: grid;
-            gap: 12px;
-            height: 100%;
-        }
-
-        .box {
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-            background: var(--panel);
-            padding: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .box::after {
-            content: "";
-            position: absolute;
-            inset: -2px;
-            z-index: -1;
-            background:
-                radial-gradient(450px 220px at 20% 0%, rgba(124, 92, 255, .18), transparent 60%),
-                radial-gradient(450px 260px at 100% 100%, rgba(35, 213, 171, .14), transparent 62%);
-        }
-
-        .label {
-            font-size: 12px;
-            color: var(--muted2);
-            margin-bottom: 6px;
-        }
-
-        .value {
-            font-weight: 620;
-        }
-
-        .muted {
-            color: var(--muted);
-        }
-
-        .mono {
-            font-family: var(--mono);
-        }
-
-        .monoSmall {
-            font-family: var(--mono);
-            font-size: 12px;
-            color: var(--muted2);
-        }
-
-        section {
-            margin-top: 22px;
-        }
-
-        .sectionHead {
-            display: flex;
-            align-items: baseline;
-            justify-content: space-between;
-            gap: 12px;
-            margin: 22px 0 10px;
-        }
-
-        .sectionHead h2 {
-            margin: 0;
-            font-size: 18px;
-            letter-spacing: -.2px;
-        }
-
-        .sectionHead .hint {
-            color: var(--muted2);
-            font-size: 12px;
-        }
-
-        .item {
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            background: var(--panel);
-            padding: 16px;
-        }
-
-        .title {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 10px;
-            font-weight: 650;
-        }
-
-        .badge {
-            font-size: 12px;
-            padding: 4px 8px;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            color: var(--muted);
-            white-space: nowrap;
-        }
-
-        .meta {
-            margin-top: 10px;
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            color: var(--muted2);
-            font-size: 12px;
-        }
-
-        .meta a {
-            color: var(--muted);
-            text-decoration: underline;
-            text-underline-offset: 3px;
-        }
-
-        .cols {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 10px;
-        }
-
-        @media (max-width:880px) {
-            .cols {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        ul.clean {
-            margin: 6px 0 0;
-            padding-left: 18px;
-        }
-
-        ul.clean li {
-            margin: 6px 0;
-        }
-
-        .pubGroup {
-            margin-top: 14px;
-        }
-
-        .pubGroup h3 {
-            margin: 14px 0 8px;
-            font-size: 14px;
-            letter-spacing: .2px;
-            color: var(--muted);
-            font-family: var(--mono);
-            text-transform: uppercase;
-        }
-
-        ol.pubList {
-            margin: 0;
-            padding-left: 18px;
-        }
-
-        ol.pubList li {
-            margin: 10px 0;
-            color: var(--text);
-        }
-
-        .pubMeta {
-            color: var(--muted);
-            font-size: 12px;
-            margin-top: 6px;
-        }
-
-        .pubError {
-            color: var(--muted);
-            font-size: 13px;
-            word-break: break-word;
-        }
-
-        footer {
-            margin-top: 26px;
-            color: var(--muted2);
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-            padding-top: 14px;
-            border-top: 1px solid var(--border);
-        }
-
-        :target {
-            scroll-margin-top: 80px;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                transition: none !important;
-                scroll-behavior: auto !important;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="山口隼平（Shunpei Yamaguchi）の研究者向け個人ページ" />
+  <meta name="theme-color" content="#0b0f14" id="themeColorMeta" />
+  <title>Shunpei Yamaguchi — Research</title>
+
+  <style>
+    html { color-scheme: light dark; }
+    html[data-theme="dark"] { color-scheme: dark; }
+    html[data-theme="light"] { color-scheme: light; }
+
+    :root{
+      --bg:#0b0f14;
+      --panel:rgba(255,255,255,.06);
+      --text:rgba(255,255,255,.88);
+      --muted:rgba(255,255,255,.62);
+      --muted2:rgba(255,255,255,.45);
+      --border:rgba(255,255,255,.12);
+      --shadow:0 18px 60px rgba(0,0,0,.45);
+      --accent:#7c5cff;
+      --accent2:#23d5ab;
+      --ring:rgba(124,92,255,.35);
+      --link:rgba(255,255,255,.88);
+      --linkHover:#fff;
+      --radius:18px;
+      --max:1040px;
+      --mono:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      --sans:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    @media (prefers-color-scheme: light){
+      html[data-theme="auto"]{
+        --bg:#f6f7fb;
+        --panel:rgba(0,0,0,.04);
+        --text:rgba(0,0,0,.86);
+        --muted:rgba(0,0,0,.62);
+        --muted2:rgba(0,0,0,.45);
+        --border:rgba(0,0,0,.10);
+        --shadow:0 18px 60px rgba(20,20,50,.12);
+        --link:rgba(0,0,0,.86);
+        --linkHover:#000;
+        --ring:rgba(124,92,255,.25);
+      }
+    }
+
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 10%, rgba(124,92,255,.18), transparent 55%),
+        radial-gradient(900px 600px at 85% 20%, rgba(35,213,171,.14), transparent 60%),
+        radial-gradient(800px 500px at 65% 85%, rgba(124,92,255,.10), transparent 60%),
+        var(--bg);
+      line-height:1.6;
+      letter-spacing:.1px;
+      overflow-x:hidden;
+    }
+    a{ color:var(--link); text-decoration:none; }
+    a:hover{ color:var(--linkHover); }
+
+    .wrap{ max-width:var(--max); margin:0 auto; padding:28px 18px 80px; }
+
+    .top{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+      background:linear-gradient(to bottom, rgba(10,12,16,.82), rgba(10,12,16,.35));
+      border-bottom:1px solid var(--border);
+    }
+    @media (prefers-color-scheme: light){
+      html[data-theme="auto"] .top{
+        background:linear-gradient(to bottom, rgba(246,247,251,.90), rgba(246,247,251,.55));
+      }
+    }
+    .top .inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .brand{ display:flex; align-items:center; gap:10px; min-width:240px; }
+    .dot{
+      width:10px; height:10px; border-radius:999px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 0 0 6px rgba(124,92,255,.12);
+    }
+    .brand .name{ font-weight:650; }
+    .brand .sub{ font-size:12px; color:var(--muted); margin-top:-2px; }
+
+    nav{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; align-items:center; }
+    .chip{
+      font-size:13px;
+      padding:8px 10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:rgba(255,255,255,.02);
+      transition:transform .18s ease, background .18s ease, border-color .18s ease;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+    }
+    @media (prefers-color-scheme: light){
+      html[data-theme="auto"] .chip{ background:rgba(0,0,0,.02); }
+    }
+    .chip:hover{
+      transform:translateY(-1px);
+      background:var(--panel);
+      border-color:rgba(124,92,255,.35);
+    }
+
+    .right{ display:flex; align-items:center; gap:10px; min-width:240px; justify-content:flex-end; flex-wrap:wrap; }
+    .btn{
+      appearance:none;
+      border:1px solid var(--border);
+      background:var(--panel);
+      color:var(--text);
+      padding:9px 12px;
+      border-radius:999px;
+      font-size:13px;
+      cursor:pointer;
+      transition:transform .18s ease, border-color .18s ease;
+    }
+    .btn:hover{ transform:translateY(-1px); border-color:rgba(124,92,255,.35); }
+    .btn:focus{ outline:none; box-shadow:0 0 0 4px var(--ring); }
+
+    .hero{ padding:46px 0 20px; }
+    .grid{ display:grid; grid-template-columns:1.3fr .7fr; gap:18px; align-items:stretch; }
+    @media (max-width:880px){
+      .grid{ grid-template-columns:1fr; }
+      .brand, .right{ min-width:auto; }
+      nav{ display:none; }
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    @media (prefers-color-scheme: light){
+      html[data-theme="auto"] .card{
+        background:linear-gradient(180deg, rgba(0,0,0,.03), rgba(0,0,0,.02));
+      }
+    }
+    .pad{ padding:22px; }
+    .kicker{
+      font-family:var(--mono);
+      font-size:12px;
+      color:var(--muted);
+      letter-spacing:.6px;
+      text-transform:uppercase;
+    }
+    h1{
+      margin:10px 0 12px;
+      font-size:clamp(28px, 4.2vw, 44px);
+      letter-spacing:-.6px;
+      line-height:1.15;
+    }
+    .lead{ color:var(--muted); font-size:15.5px; max-width:66ch; }
+    .pillrow{ margin-top:16px; display:flex; flex-wrap:wrap; gap:10px; }
+    .pill{
+      border-radius:999px;
+      padding:8px 10px;
+      font-size:12.5px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      color:var(--muted);
+    }
+    @media (prefers-color-scheme: light){
+      html[data-theme="auto"] .pill{ background:rgba(0,0,0,.02); }
+    }
+
+    .mini{ display:grid; gap:12px; height:100%; }
+    .box{
+      border-radius:var(--radius);
+      border:1px solid var(--border);
+      background:var(--panel);
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .box::after{
+      content:"";
+      position:absolute; inset:-2px; z-index:-1;
+      background:
+        radial-gradient(450px 220px at 20% 0%, rgba(124,92,255,.18), transparent 60%),
+        radial-gradient(450px 260px at 100% 100%, rgba(35,213,171,.14), transparent 62%);
+    }
+
+    .label{ font-size:12px; color:var(--muted2); margin-bottom:6px; }
+    .value{ font-weight:620; }
+    .muted{ color:var(--muted); }
+    .mono{ font-family:var(--mono); }
+    .monoSmall{ font-family:var(--mono); font-size:12px; color:var(--muted2); }
+
+    section{ margin-top:22px; }
+    .sectionHead{ display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin:22px 0 10px; }
+    .sectionHead h2{ margin:0; font-size:18px; letter-spacing:-.2px; }
+    .sectionHead .hint{ color:var(--muted2); font-size:12px; }
+
+    .item{
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      background:var(--panel);
+      padding:16px;
+    }
+    .title{ display:flex; align-items:flex-start; justify-content:space-between; gap:10px; font-weight:650; }
+    .badge{
+      font-size:12px;
+      padding:4px 8px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      white-space:nowrap;
+    }
+    .meta{ margin-top:10px; display:flex; gap:10px; flex-wrap:wrap; color:var(--muted2); font-size:12px; }
+    .meta a{ color:var(--muted); text-decoration:underline; text-underline-offset:3px; }
+
+    .cols{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px; }
+    @media (max-width:880px){ .cols{ grid-template-columns:1fr; } }
+
+    ul.clean{ margin:6px 0 0; padding-left:18px; }
+    ul.clean li{ margin:6px 0; }
+
+    .pubGroup{ margin-top:14px; }
+    .pubGroup h3{
+      margin:14px 0 8px;
+      font-size:14px;
+      letter-spacing:.2px;
+      color:var(--muted);
+      font-family:var(--mono);
+      text-transform:uppercase;
+    }
+    ol.pubList{ margin:0; padding-left:18px; }
+    ol.pubList li{ margin:10px 0; color:var(--text); }
+    .pubMeta{ color:var(--muted); font-size:12px; margin-top:6px; }
+    .pubError{ color:var(--muted); font-size:13px; }
+
+    footer{
+      margin-top:26px;
+      color:var(--muted2);
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      padding-top:14px;
+      border-top:1px solid var(--border);
+    }
+    :target{ scroll-margin-top:80px; }
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; scroll-behavior:auto !important; }
+    }
+  </style>
 </head>
 
 <body>
-    <header class="top">
-        <div class="inner">
-            <div class="brand">
-                <div class="dot" aria-hidden="true"></div>
-                <div>
-                    <div class="name">Shunpei Yamaguchi</div>
-                    <div class="sub" data-i18n="brand_sub">広島市立大学 大学院情報科学研究科 / 助教</div>
-                </div>
-            </div>
+<header class="top">
+  <div class="inner">
+    <div class="brand">
+      <div class="dot" aria-hidden="true"></div>
+      <div>
+        <div class="name">Shunpei Yamaguchi</div>
+        <div class="sub" data-i18n="brand_sub">広島市立大学 大学院情報科学研究科 / 助教</div>
+      </div>
+    </div>
 
-            <nav aria-label="Primary">
-                <a class="chip" href="#about" data-i18n="nav_about">概要</a>
-                <a class="chip" href="#pubs" data-i18n="nav_pubs">論文</a>
-                <a class="chip" href="#career" data-i18n="nav_career">経歴</a>
-                <a class="chip" href="#projects" data-i18n="nav_projects">プロジェクト</a>
-                <a class="chip" href="#contact" data-i18n="nav_contact">連絡先</a>
-            </nav>
+    <nav aria-label="Primary">
+      <a class="chip" href="#about" data-i18n="nav_about">概要</a>
+      <a class="chip" href="#pubs" data-i18n="nav_pubs">論文</a>
+      <a class="chip" href="#career" data-i18n="nav_career">経歴</a>
+      <!-- ★変更：受賞は手書きセクションを消すので、Publications内のAwardへ飛ばす -->
+      <a class="chip" href="#pub-awards" data-i18n="nav_awards">受賞</a>
+      <a class="chip" href="#projects" data-i18n="nav_projects">プロジェクト</a>
+      <a class="chip" href="#contact" data-i18n="nav_contact">連絡先</a>
+    </nav>
 
-            <div class="right">
-                <button class="btn" id="themeBtn" type="button" aria-label="Theme mode">🌓 Auto</button>
-                <button class="btn" id="langBtn" type="button" aria-label="Language">🌐 日本語</button>
-                <a class="chip" href="./cv.pdf" data-i18n="btn_cv">履歴書</a>
-            </div>
+    <div class="right">
+      <button class="btn" id="themeBtn" type="button" aria-label="Theme mode">🌓 Auto</button>
+      <button class="btn" id="langBtn" type="button" aria-label="Language">🌐 日本語</button>
+      <a class="chip" href="./cv.pdf" data-i18n="btn_cv">履歴書</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="grid">
+      <div class="card">
+        <div class="pad">
+          <div class="kicker">Researcher · Personal page</div>
+          <h1>
+            <span data-i18n="hero_line1">現実環境で頑健に動く</span>
+            <span style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;" data-i18n="hero_focus">モバイルセンシング</span>
+            <span data-i18n="hero_line2">を作っています。</span>
+          </h1>
+
+          <p class="lead" data-i18n="hero_lead">
+            モバイルコンピューティングとセンシング（Wi-Fiセンシング、自己位置推定、SLAM、AR）を中心に、
+            現実環境で使えるシステム設計と実験に取り組んでいます。
+          </p>
+
+          <div class="pillrow" aria-label="Keywords">
+            <span class="pill" data-i18n="kw_mobile">Mobile Computing</span>
+            <span class="pill" data-i18n="kw_sensing">Sensing</span>
+            <span class="pill" data-i18n="kw_wifi">Wi-Fi Sensing</span>
+            <span class="pill" data-i18n="kw_loc">Localization</span>
+            <span class="pill" data-i18n="kw_slam">SLAM / AR</span>
+          </div>
+
+          <div class="pillrow" style="margin-top:14px">
+            <a class="chip" href="#" target="_blank" rel="noreferrer" data-i18n="link_scholar">Google Scholar</a>
+            <a class="chip" href="#" target="_blank" rel="noreferrer" data-i18n="link_researchmap">Researchmap</a>
+            <a class="chip" href="https://orcid.org/0000-0002-6418-3964" target="_blank" rel="noreferrer">ORCID</a>
+          </div>
         </div>
-    </header>
+      </div>
 
-    <main class="wrap">
-        <div class="hero">
-            <div class="grid">
-                <div class="card">
-                    <div class="pad">
-                        <div class="kicker">Researcher · Personal page</div>
-
-                        <h1>
-                            <span data-i18n="hero_line1">現実環境で頑健に動く</span>
-                            <span
-                                style="background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;"
-                                data-i18n="hero_focus">モバイルセンシング</span>
-                            <span data-i18n="hero_line2">を作っています。</span>
-                        </h1>
-
-                        <p class="lead" data-i18n="hero_lead">
-                            モバイルコンピューティングとセンシング（Wi-Fiセンシング、自己位置推定、SLAM、AR）を中心に、
-                            現実環境で使えるシステム設計と実験に取り組んでいます。
-                        </p>
-
-                        <div class="pillrow" aria-label="Keywords">
-                            <span class="pill" data-i18n="kw_mobile">Mobile Computing</span>
-                            <span class="pill" data-i18n="kw_sensing">Sensing</span>
-                            <span class="pill" data-i18n="kw_wifi">Wi-Fi Sensing</span>
-                            <span class="pill" data-i18n="kw_loc">Localization</span>
-                            <span class="pill" data-i18n="kw_slam">SLAM / AR</span>
-                        </div>
-
-                        <div class="pillrow" style="margin-top:14px">
-                            <!-- URLs are placeholders except ORCID; replace as needed -->
-                            <a class="chip" href="#" target="_blank" rel="noreferrer" data-i18n="link_scholar">Google
-                                Scholar</a>
-                            <a class="chip" href="#" target="_blank" rel="noreferrer"
-                                data-i18n="link_researchmap">Researchmap</a>
-                            <a class="chip" href="https://orcid.org/0000-0002-6418-3964" target="_blank"
-                                rel="noreferrer">ORCID</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mini">
-                    <div class="box">
-                        <div class="label" data-i18n="box_now_label">現在</div>
-                        <div class="value" data-i18n="box_now_value">助教 / 広島市立大学（2025.04–）</div>
-                        <div class="muted" style="margin-top:6px" data-i18n="box_now_work">
-                            研究：<span class="mono">mobile computing · sensing</span>
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="label" data-i18n="box_contact_label">連絡</div>
-                        <div class="value mono">yamaguchi-s(at sign)hiroshima-cu.ac.jp</div>
-                        <div class="muted" style="margin-top:6px" data-i18n="box_contact_meta">Japan</div>
-                    </div>
-                </div>
-            </div>
+      <div class="mini">
+        <div class="box">
+          <div class="label" data-i18n="box_now_label">現在</div>
+          <div class="value" data-i18n="box_now_value">助教 / 広島市立大学（2025.04–）</div>
+          <div class="muted" style="margin-top:6px" data-i18n="box_now_work">
+            研究：<span class="mono">mobile computing · sensing</span>
+          </div>
         </div>
 
-        <section id="about">
-            <div class="sectionHead">
-                <h2 data-i18n="about_h2">概要</h2>
-                <div class="hint" data-i18n="about_hint">短く・強く</div>
-            </div>
-
-            <div class="item">
-                <div class="title">
-                    <div data-i18n="about_title">Bio</div>
-                    <span class="badge"><span data-i18n="updated">更新</span> <span id="updatedDate"></span></span>
-                </div>
-
-                <p data-i18n="bio_p">
-                    2020年大阪大学工学部電子情報工学科卒業，2022年同大学院情報科学研究科博士前期課程修了，2025年同博士後期課程修了（博士（情報科学））．
-                    2022–2025年日本学術振興会特別研究員（DC1）．2024年4月〜9月，コペンハーゲン大学客員研究員（JSPS 若手研究者海外挑戦プログラム）．
-                    2025年4月より広島市立大学大学院情報科学研究科 助教．モバイルコンピューティング，センシングに関する研究に従事．
-                </p>
-
-                <div class="meta">
-                    <span data-i18n="bio_interest">所属：広島市立大学 大学院情報科学研究科</span>
-                    <span>•</span>
-                    <a href="./cv.pdf" data-i18n="bio_cv">履歴書（PDF）</a>
-                    <a href="https://orcid.org/0000-0002-6418-3964" target="_blank" rel="noreferrer">ORCID</a>
-                    <a href="#contact" data-i18n="bio_contact">連絡</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="pubs">
-            <div class="sectionHead">
-                <h2 data-i18n="pubs_h2">業績</h2>
-                <div class="hint" data-i18n="pubs_hint">./publication/*.bib から自動生成</div>
-            </div>
-
-            <div class="item">
-                <div class="title">
-                    <div>Publications</div>
-                </div>
-
-                <p class="monoSmall" id="pubStatus">Loading…</p>
-
-                <div class="pubGroup">
-                    <h3>Journal</h3>
-                    <ol class="pubList" id="pub-journal"></ol>
-                </div>
-                <div class="pubGroup">
-                    <h3>Conference</h3>
-                    <ol class="pubList" id="pub-conference"></ol>
-                </div>
-                <div class="pubGroup">
-                    <h3>Symposium</h3>
-                    <ol class="pubList" id="pub-symposium"></ol>
-                </div>
-                <div class="pubGroup">
-                    <h3>Domestic</h3>
-                    <ol class="pubList" id="pub-domestic"></ol>
-                </div>
-                <div class="pubGroup">
-                    <h3>Award</h3>
-                    <ol class="pubList" id="pub-award"></ol>
-                </div>
-                <div class="pubGroup">
-                    <h3>Patent</h3>
-                    <ol class="pubList" id="pub-patent"></ol>
-                </div>
-                <div class="pubGroup">
-                    <h3>Others</h3>
-                    <ol class="pubList" id="pub-others"></ol>
-                </div>
-
-                <p class="pubError" id="pubError" style="display:none;"></p>
-            </div>
-        </section>
-
-        <section id="career">
-            <div class="sectionHead">
-                <h2 data-i18n="career_h2">経歴</h2>
-                <div class="hint" data-i18n="career_hint">主要な所属・活動</div>
-            </div>
-
-            <div class="item">
-                <div class="title">
-                    <div data-i18n="career_title">Timeline</div>
-                </div>
-
-                <div class="cols">
-                    <div>
-                        <div class="label" data-i18n="career_edu">学歴・職歴</div>
-                        <ul class="clean" data-i18n="career_edu_list">
-                            <li>2025.04–　広島市立大学 大学院情報科学研究科 助教</li>
-                            <li>2022.04–2025.03　大阪大学大学院情報科学研究科 博士後期課程</li>
-                            <li>2022.04–2025.03　日本学術振興会特別研究員（DC1）</li>
-                            <li>2024.04–2024.09　コペンハーゲン大学 客員研究員（JSPS 若手研究者海外挑戦プログラム）</li>
-                            <li>2022.04–2023.03　京都女子高等学校 非常勤講師（情報I）</li>
-                            <li>2021.05–2022.03　シスメックス株式会社 学生研究員</li>
-                            <li>2022.03　大阪大学大学院情報科学研究科 博士前期課程 修了</li>
-                            <li>2020.03　大阪大学工学部電子情報工学科 卒業</li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <div class="label" data-i18n="career_service">学会活動・諸活動</div>
-                        <ul class="clean" data-i18n="career_service_list">
-                            <li>2023.06　大学教育学会 第45回大会 運営補助</li>
-                            <li>2021.03　情報処理学会 第83回全国大会 運営補助</li>
-                            <li>2020.06　情報処理学会 DICOMO2020 シンポジウム 運営補助</li>
-                            <li>2021.12–　大阪大学SEEDSプログラム ティーチングアシスタント（TA）</li>
-                            <li>2017.06–　大阪大学工学部公式ブログ「阪大工学部の散歩道」執筆担当</li>
-                            <li>2023.04–2023.09　確率統計 ティーチングフェロー（TF）（2023年度春・夏学期）</li>
-                            <li>2022.04–2022.09　確率統計 ティーチングフェロー（TF）（2022年度春・夏学期）</li>
-                        </ul>
-
-                        <div class="label" style="margin-top:12px" data-i18n="career_qual">資格等</div>
-                        <ul class="clean" data-i18n="career_qual_list">
-                            <li>2024.03　高度副プログラム 未来の大学教員養成プログラム 修了</li>
-                            <li>2022.03　高等学校教諭一種免許状（数学・情報）取得</li>
-                            <li>2021.06　TOEIC Listening &amp; Reading 815点</li>
-                            <li>2019.03　enPiT-Security（SecCap 8）修了</li>
-                            <li>2017.11　普通自動車運転免許（AT限定）取得</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects">
-            <div class="sectionHead">
-                <h2 data-i18n="projects_h2">プロジェクト</h2>
-                <div class="hint" data-i18n="projects_hint">研究の“実体”を見せる（必要に応じて追加）</div>
-            </div>
-
-            <div class="item">
-                <div class="title">
-                    <div data-i18n="proj_name">（例）Wi-Fiセンシング × AR</div>
-                </div>
-                <p data-i18n="proj_p">
-                    現実環境でのロバスト性を意識して、Wi-Fiセンシングと自己位置推定／AR応用をつなぐシステム・評価を設計しています。
-                    実装・データ・再現性を意識した公開を目指しています。
-                </p>
-                <div class="meta">
-                    <a href="#" target="_blank" rel="noreferrer" data-i18n="proj_repo">Repository</a>
-                    <a href="#" target="_blank" rel="noreferrer" data-i18n="proj_demo">Demo</a>
-                    <span class="muted" data-i18n="proj_tech">Tech: Python / ROS 2 / Embedded</span>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="sectionHead">
-                <h2 data-i18n="contact_h2">連絡先</h2>
-                <div class="hint" data-i18n="contact_hint">返信しやすい情報だけ</div>
-            </div>
-
-            <div class="item">
-                <div class="title">
-                    <div data-i18n="contact_title">Get in touch</div>
-                </div>
-
-                <p>
-                    <span data-i18n="contact_email">Email:</span>
-                    <span class="mono">yamaguchi-s(at sign)hiroshima-cu.ac.jp</span><br />
-                    <span data-i18n="contact_affil">所属:</span>
-                    <span data-i18n="contact_affil_value">広島市立大学 大学院情報科学研究科 モニタリングネットワーク研究グループ</span><br />
-                </p>
-
-                <div class="meta">
-                    <a href="mailto:yamaguchi-s@hiroshima-cu.ac.jp" data-i18n="contact_mail">Mail</a>
-                    <a href="https://orcid.org/0000-0002-6418-3964" target="_blank" rel="noreferrer">ORCID</a>
-                    <a href="#" target="_blank" rel="noreferrer" data-i18n="contact_scholar">Scholar</a>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <div>© <span id="year"></span> Shunpei Yamaguchi. All rights reserved.</div>
-            <div class="mono">Last build: <span id="build"></span></div>
-        </footer>
-    </main>
-
-    <!-- Theme (fixed: local root + safe init) -->
-    <script>
-        (() => {
-            const root = document.documentElement;
-            const themeBtn = document.getElementById('themeBtn');
-            const themeMeta = document.getElementById('themeColorMeta');
-            if (!themeBtn || !themeMeta) return;
-
-            function prefersLightNow() {
-                return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-            }
-            function currentThemeResolved() {
-                const mode = root.getAttribute('data-theme') || 'auto';
-                if (mode === 'auto') return prefersLightNow() ? 'light' : 'dark';
-                return mode;
-            }
-            function updateThemeColorMeta() {
-                themeMeta.setAttribute('content', currentThemeResolved() === 'light' ? '#f6f7fb' : '#0b0f14');
-            }
-            function setThemeMode(mode) {
-                root.setAttribute('data-theme', mode);
-                localStorage.setItem('theme_mode', mode);
-                themeBtn.textContent = mode === 'auto' ? '🌓 Auto' : (mode === 'light' ? '☀️ Light' : '🌙 Dark');
-                updateThemeColorMeta();
-            }
-
-            setThemeMode(localStorage.getItem('theme_mode') || 'auto');
-
-      if (window.matchMedia) {
-                window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
-                    if ((root.getAttribute('data-theme') || 'auto') === 'auto') updateThemeColorMeta();
-                });
-            }
-
-            themeBtn.addEventListener('click', () => {
-                const cur = root.getAttribute('data-theme') || 'auto';
-                const next = (cur === 'auto') ? 'dark' : (cur === 'dark' ? 'light' : 'auto');
-                setThemeMode(next);
-            });
-
-            const y = document.getElementById('year');
-            const b = document.getElementById('build');
-            const u = document.getElementById('updatedDate');
-            const now = new Date();
-            if (y) y.textContent = String(now.getFullYear());
-            if (b) b.textContent = now.toISOString().slice(0, 10) + " " + now.toTimeString().slice(0, 8);
-            if (u) u.textContent = now.toISOString().slice(0, 10);
-        })();
-    </script>
-
-    <!-- Language (JA/EN) (fixed: local root + DOMContentLoaded safe) -->
-    <script>
-        (() => {
-            const root = document.documentElement;
-
-            const I18N = {
-                en: {
-                    brand_sub: "Hiroshima City University · Graduate School of Information Sciences / Assistant Professor",
-
-                    nav_about: "About",
-                    nav_pubs: "Publications",
-                    nav_career: "Career",
-                    nav_projects: "Projects",
-                   nav_contact: "Contact",
-                    btn_cv: "CV",
-
-                    hero_line1: "Building robust",
-                    hero_focus: "mobile sensing",
-                    hero_line2: " for real-world environments.",
-                    hero_lead: "My research focuses on mobile computing and sensing, including Wi-Fi sensing, localization, SLAM, and AR systems designed and evaluated for real deployments.",
-
-                    kw_mobile: "Mobile computing",
-                    kw_sensing: "Sensing",
-                    kw_wifi: "Wi-Fi sensing",
-                    kw_loc: "Localization",
-                    kw_slam: "SLAM / AR",
-
-                    link_scholar: "Google Scholar",
-                    link_researchmap: "Researchmap",
-
-                    box_now_label: "Now",
-                    box_now_value: "Assistant Professor / Hiroshima City University (since Apr 2025)",
-                    box_now_work: "Working on: <span class=\"mono\">mobile computing · sensing</span>",
-                   box_contact_label: "Contact",
-                    box_contact_meta: "Japan",
-
-                    about_h2: "About",
-                    about_hint: "Short and strong",
-                    about_title: "Bio",
-                    updated: "Updated",
-                    bio_p: "Shunpei Yamaguchi received B.E., M.E., and Ph.D. degrees from Osaka University in 2020, 2022, and 2025, respectively. He was a Research Fellow (DC1) of JSPS from 2022 to 2025, and a visiting scholar at the University of Copenhagen (Apr–Sep 2024) supported by the JSPS Overseas Challenge Program for Young Researchers. Since April 2025, he has been an assistant professor at Hiroshima City University. His research interests include mobile computing and sensing.",
-                    bio_interest: "Affiliation: Hiroshima City University · Graduate School of Information Sciences",
-                    bio_cv: "CV (PDF)",
-                    bio_contact: "Contact",
-
-                    pubs_h2: "Publications",
-                    pubs_hint: "o-generated from ./publication/*.bib",
-
-                    career_h2: "Career",
-                    career_hint: "Selected positions and services",
-                    career_title: "Timeline",
-                    career_edu: "Education & positions",
-                    career_edu_list: "<li>Apr 2025– : Assistant Professor, Hiroshima City University</li><li>Apr 2022–Mar 2025 : Ph.D. program, Graduate School of Information Science and Technology, Osaka University</li><li>Apr 2022–Mar 2025 : JSPS Reseallow (DC1)</li><li>Apr 2024–Sep 2024 : Visiting Scholar, University of Copenhagen (JSPS Overseas Challenge Program for Young Researchers)</li><li>Apr 2022–Mar 2023 : Part-time lecturer (Information I), Kyoto Women's High School</li><li>May 2021–Mar 2022 : Student researcher, Sysmex Corporation</li><li>Mar 2022 : M.E., Osaka University</li><li>Mar 2020 : B.E., Osaka University</li>",
-                    career_service: "Service & activities",
-                    career_service_list: "<li>Jun 2023: StafUE 45th Annual Meeting</li><li>Mar 2021: Staff, IPSJ 83rd National Convention</li><li>Jun 2020: Staff, IPSJ DICOMO 2020 Symposium</li><li>Since Dec 2021: TA, Osaka University SEEDS program</li><li>Since Jun 2017: Writer, Osaka University engineering blog</li><li>Apr–Sep 2023: Teaching Fellow, Probability & Statistics</li><li>Apr–Sep 2022: Teaching Fellow, Probability & Statistics</li>",
-                    career_qual: "Qualifications",
-                    career_qual_list: "<li>Mar 2024: Completed Adva Sub-Program (Faculty Development)</li><li>Mar 2022: Secondary school teaching license (Math/Information)</li><li>Jun 2021: TOEIC L&amp;R 815</li><li>Mar 2019: Completed enPiT-Security (SecCap 8)</li><li>Nov 2017: Driver’s license (AT)</li>",
-
-                    projects_h2: "Projects",
-                    projects_hint: "Add as needed",
-                    proj_name: "(Example) Wi-Fi sensing × AR",
-                    proj_p: "I build and evaluate systems that connect Wi-Fi sensing with localization anR applications, aiming for robustness in real environments and reproducible artifacts (code/data/experiments).",
-                    proj_repo: "Repository",
-                    proj_demo: "Demo",
-                    proj_tech: "Tech: Python / ROS 2 / Embedded",
-
-                    contact_h2: "Contact",
-                    contact_hint: "Only what makes replying easy",
-                    contact_title: "Get in touch",
-                    contact_email: "Email:",
-                    contact_affil: "Affiliation:",
-                    contact_affil_value: "Hiroshima City University, Graduate School of Information Sciences",
-                    contact_mail: "Mail",
-                    contact_scholar: "Scholar"
-                },
-                ja: {
-                    // Japanese is the in-page original; stored automatically on first run
-                }
-            };
-
-            function applyLang(lang) {
-                root.setAttribute("data-lang", lang);
-                root.setAttribute("lang", lang === "en" ? "en" : "ja");
-
-                const langBtn = document.getElementById("langBtn");
-                if (langBtn) langBtn.textContent = (lang === "en") ? "🌐 English" : "🌐 日本語";
-
-                const dict = I18N[lang] || {};
-                document.querySelectorAll("[data-i18n]").forEach(el => {
-                    const key = el.getAttribute("data-i18n");
-                    if (!key) return;
-
-                    // store JA once
-                    if (!el.hasAttribute("data-i18n-etAttribute("data-i18n-ja", el.innerHTML);
-
-                    if (lang === "en") {
-                        if (dict[key] != null) el.innerHTML = dict[key];
-                    } else {
-                        el.innerHTML = el.getAttribute("data-i18n-ja") || el.innerHTML;
-                    }
-                });
-
-                localStorage.setItem("site_lang", lang);
-            }
-
-            function initLang() {
-                const langBtn = document.getElementById("langBtn");
-                if (!langBtn) return;
-
-                const saved = localStorage.getItem("site_lang");
-                applyLang(saved === "en" ? "en" : "ja");
-
-                langBtn.addEventListener("click", () => {
-                    const cur = root.getAttribute("data-lang") || "ja";
-                    applyLang(cur === "ja" ? "en" : "ja");
-                });
-            }
-
-            if (document.readyState === "loading") {
-                document.addEventListener("DOMContentLoaded", initLang);
-            } else {
-                initLang();
-            }
-        })();
-    </script>
-
-    <!-- Publications (BibTeX) (fixed: never-stuck loading + timeout + error display) -->
-    <script>
-        (() => {
-            function initPubs() {
-                const PUB_FILES = [
-                    "./publication/journal.bib",
-                    "./publication/conference.bib",
-                    "./publication/symposium.bib",
-                    "./publication/domestic.bib",
-                    "./publication/award.bib",
-                    "./publication/patent.bib",
-                    "./publication/others.bib",
-                ];
-
-                const statusEl = document.getElementById("pubStatus");
-                const errorEl = document.getElementById("pubError");
-
-                const listEls = {
-                    journal: document.getElementById("pub-journal"),
-                    conference: document.getElementById("pub-conference"),
-                    symposium: document.getElementById("pub-symposium"),
-                    domestic: document.getElementById("pub-domestic"),
-                    award: document.getElementById("pub-award"),
-                    patent: document.getElementById("pub-patent"),
-                    others: document.getElementById("pub-others"),
-                };
-
-                if (!statusEl || !errorEl || Object.values(listEls).some(v => !v)) return;
-
-                function escapeHtml(s) {
-                    return (s ?? "")
-                        .replaceAll("&", "&amp;")
-                        .replaceAll("<", "&lt;")
-                        .replaceAll(">", "&gt;")
-                        .replaceAll('"', "&quot;")
-                        .replaceAll("'", "&#039;");
-                }
-
-                function typographicFix(s) { return (s ?? "").replaceAll("--", "–"); }
-
-                function latexLightNormalize(s) {
-                    let x = (s ?? "").trim();
-                    if (!x) return x;
-                    x = x.replaceAll("~", " ");
-                    x = x.rlace(/\s+/g, " ").trim();
-                    return x;
-                }
-
-                function fmtAuthors(s) {
-                    const x = latexLightNormalize(s);
-                    return typographicFix(x).replace(/\s+and\s+/gi, ", ");
-                }
-
-                function stripComments(s) {
-                    const lines = s.split(/\r?\n/);
-                    const out = [];
-                    for (const line of lines) {
-                        let acc = "";
-                        let escaped = false;
-                        for (let i = 0; i < line.length; i++) {
-                            const ch = line[i];
-                            if (ch === "\\" && !escaped) { escaped = true; acc += ch; continue; }
-                            if (ch === "%" && !escaped) break;
-                            escaped = false;
-                            acc += ch;
-                        }
-                        out.push(acc);
-                    }
-                    return out.join("\n");
-                }
-
-                function yearNum(s) {
-                    const m = (s || "").match(/\d{4}/);
-                    return m ? parseInt(m[0], 10) : -1;
-                }
-
-                function makeLi(html, id) {
-                    const li = document.createElement("li");
-                    if (id) li.id = id;
-                    li.innerHTML = html;
-                    return li;
-                }
-
-                function stripOuterBraces(v) {
-                    let s = (v ?? "").trim();
-                    if (!s) return s;
-
-                    if (s.startsWith('"') && s.endsWith('"')) return s.slice(1, -1).trim();
-
-                    if (s.startsWith("{") && s.endsWith("}")) {
-                        let depth = 0;
-                        for (let i = 0; i < s.length; i++) {
-                            const ch = s[i];
-                            if (ch === "{") depth++;
-                            else if (ch === "}") depth--;
-                            if (depth === 0 && i !== s.length - 1) return s; // e.g., {a} # {b}
-                        }
-                        return s.slice(1, -1).trim();
-                    }
-                    return s;
-                }
-
-                function splitTopLevel(s, sepChar) {
-                    const parts = [];
-                    let buf = "";
-                    let depth = 0;
-                    let inQuote = false;
-                    let esc = false;
-
-                    for (let i = 0; i < s.length; i++) {
-                        const ch = s[i];
-                        if (esc) { buf += ch; esc = false; continue; }
-                        if (ch === "\\") { buf += ch; esc = true; continue; }
-
-                        if (ch === '"') { inQuote = !inQuote; buf += ch; continue; }
-                        if (!inQuote) {
-                            if (ch === "{") depth++;
-                            else if (ch === "}") depth = Math.max(0, depth - 1);
-                            if (depth === 0 && ch === sepChar) {
-                                parts.push(buf);
-                                buf = "";
-                                continue;
-                            }
-                        }
-                        buf += ch;
-                    }
-                    if (buf.trim() !== "") parts.push(buf);
-                    return parts;
-                }
-
-                function parseBibTeX(text) {
-                    const t = stripComments(text || "");
-                    const entries = [];
-                    let i = 0;
-
-                    while (i < t.length) {
-                        const at = t.indexOf("@", i);
-                        if (at === -1) break;
-                        const brace = t.indexOf("{", at);
-                        if (brace === -1) break;
-
-                        const type = t.slice(at + 1, brace).trim().toLowerCase();
-
-                        let depth = 0;
-                        let j = brace;
-                        for (; j < t.length; j++) {
-                            const ch = t[j];
-                            if (ch === "{") depth++;
-                            else if (ch === "}") depth--;
-                            if (depth === 0) break;
-                        }
-                        if (depth !== 0) break;
-
-                        const bodyAll = t.slice(brace + 1, j).trim();
-                        const comma = bodyAll.indexOf(",");
-                        if (comma === -1) { i = j + 1; continue; }
-
-                        const key = bodyAll.slice(0, comma).trim();
-                        const body = bodyAll.slice(comma + 1).trim();
-
-                        const fields = {};
-                        const chunks = splitTopLevel(body, ",");
-                        for (const chunkRaw of chunks) {
-                            const chunk = chunkRaw.trim();
-                            if (!chunk) continue;
-                            const eq = chunk.indexOf("=");
-                            if (eq === -1) continue;
-                            const name = chunk.slice(0, eq).trim().toLowerCase();
-                            let val = chunk.slice(eq + 1).trim();
-                            val = stripOuterBraces(val);
-                            fields[name] = val;
-                        }
-
-                        entries.push({ type, key, fields });
-                        i = j + 1;
-                    }
-
-                    return entries;
-                }
-
-                function fieldAny(f, keys) {
-                    for (const k of keys) {
-                        const v = f[k];
-                        if (v && String(v).trim() !== "") return String(v).trim();
-                    }
-                    return "";
-                }
-
-                function linkPartFor(f) {
-                    const url = latexLightNormalize(fieldAny(f, ["url"]));
-                    const doi = latexLightNormalize(fieldAny(f, ["doi"]));
-                    if (url) return ` <span class="pubMeta"><a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Link</a></span>`;
-                    if (doi) return ` <span class="pubMeta"><a href="https://doi.org/${escapeHtml(doi)}" target="_blank" rel="noreferrer">DOI</a></span>`;
-                    return "";
-                }
-
-                function notePartFor(f) {
-                    const noteRaw = latexLightNormalize(fieldAny(f, ["note"]));
-                    const note = typographicFix(noteRaw);
-                    if (!note) return "";
-                    if (/peer\s*-?\s*review/i.test(note)) return "";
-                    return ` (${escapeHtml(note)})`;
-                }
-
-                function fmtJournal(e) {
-                    const f = e.fields;
-                    const authors = fmtAuthors(fieldAny(f, ["author", "authors"]));
-                    const title = typographicFix(latexLightNormalize(stripOuterBraces(fieldAny(f, ["title"]))));
-                    const venue = typographicFix(latexLightNormalize(fieldAny(f, ["journal", "booktitle"])));
-                    const vol = typographicFix(latexLightNormalize(fieldAny(f, ["volume", "vol"])));
-                    const no = typographicFix(latexLightNormalize(fieldAny(f, ["number", "no"])));
-                    const pages = typographicFix(latexLightNormalize(fieldAny(f, ["pages", "page"])));
-                    const year = typographicFix(latexLightNormalize(fieldAny(f, ["year", "date"])));
-
-                    const noPart = (vol && no) ? `, no.&nbsp;${escapeHtml(no)}` : "";
-                    const notePart = notePartFor(f);
-                    const linkPart = linkPartFor(f);
-
-                    const html =
-                        `${escapeHtml(authors)}` +
-                        (title ? `, “${escapeHtml(title)},”` : ",") +
-                        (venue ? ` <i>${escapeHtml(venue)}</i>` : "") +
-                        (vol ? `, vol.&nbsp;${escapeHtml(vol)}` : "") +
-                        (vol ? noPart : "") +
-                        (pages ? `, pp.&nbsp;${escapeHtml(pages)}` : "") +
-                        (year ? `, ${escapeHtml(year)}` : "") +
-                        `${notePart}.                        linkPart;
-
-                    return { html, id: e.key || "", y: yearNum(year) };
-                }
-
-                function fmtConference(e) {
-                    const f = e.fields;
-                    const authors = fmtAuthors(fieldAny(f, ["author", "authors"]));
-                    const title = typographicFix(latexLightNormalize(stripOuterBraces(fieldAny(f, ["title"]))));
-                    const venue = typographicFix(latexLightNormalize(fieldAny(f, ["booktitle", "journal"])));
-                    const pages = typographicFix(latexLightNormalize(fieldAny(f, ["pages", "page"])));
-                    const year = typographicFix(latexLightNormalize(fieldAny(f, ["year", "date"])));
-
-                    const notePart = notePartFor(f);
-                    const linkPart = linkPartFor(f);
-
-                    const html =
-                        `${escapeHtml(authors)}` +
-                        (title ? `, “${escapeHtml(title)},”` : ",") +
-                        (venue ? ` <iscapeHtml(venue)}</i>` : "") +
-                        (pages ? `, pp.&nbsp;${escapeHtml(pages)}` : "") +
-                        (year ? `, ${escapeHtml(year)}` : "") +
-                        `${notePart}.` +
-                        linkPart;
-
-                    return { html, id: e.key || "", y: yearNum(year) };
-                }
-
-                function fmtGeneric(e) {
-                    const f = e.fields;
-                    const authors = fmtAuthors(fieldAny(f, ["author", "authors"]));
-                    const title = typographicFix(latexLightNormalize(stripOuterBraces(fieldAny(f, ["title"]))));
-                    const where = typographicFix(latexLightNormalize(fieldAny(f, ["howpublished", "booktitle", "journal"])));
-                    const year = typographicFix(latexLightNormalize(fieldAny(f, ["year", "date"])));
-
-                    const notePart = notePartFor(f);
-                    const linkPart = linkPartFor(f);
-
-                    const html =
-                        `${escapeHtml(authors)}` +
-                        (title ? `, “${escapeHtml(title)}”` : "") +
-                        (where ? `, ${escapeHtml(where)}` : "") +
-                        (year ? `, ${escapeHtml(year)}` : "") +
-                        `${notePart}.` +
-                        linkPart;
-
-                    return { html, id: e.key || "", y: yearNum(year) };
-                }
-
-                async function fetchWithTimeout(url, ms) {
-                    const ctrl = new AbortController();
-                  nst timer = setTimeout(() => ctrl.abort(), ms);
-                    try {
-                        const r = await fetch(url, { cache: "no-store", signal: ctrl.signal });
-                        return r;
-                    } finally {
-                        clearTimeout(timer);
-                    }
-                }
-
-                async function loadAllPublications() {
-                    statusEl.textContent = "Loading…";
-                    errorEl.style.display = "none";
-                    errorEtextContent = "";
-                    for (const k of Object.keys(listEls)) listEls[k].innerHTML = "";
-
-                    const fetched = [];
-                    const failures = [];
-
-                    for (const path of PUB_FILES) {
-                        try {
-                            const r = await fetchWithTimeout(path, 8000);
-                            if (!r || !r.ok) throw new Error(r ? `${r.status} ${r.statusText}` : "fetch failed");
-                            fetched.push({ path, text: await r.text() });
-                        } catch (e) {
-                            failures.push({ path, err: String(e) });
-                        }
-                    }
-
-                    const groups = { journal: [], conference: [], symposium: [], domestic: [], award: [], patent: [], others: [] };
-
-                    for (const f of fetched) {
-                        const entries = parseBibTeX(f.text);
-
-                        if (/journal\.bib$/i.test(f.path)) for (const e of entries) groups.journal.push(fmtJournal(e));
-                        else if (/conference\.bib$/i.test(f.path)) for (const e of entries) groups.conference.push(fmtConference(e));
-                        else if (/symposium\.bib$/i.test(f.path)) for (const e of entries) groups.symposium.push(fmtGeneric(e));
-                        else if (/domestic\.bib$/i.test(f.path)) for (const e of entries) groups.domestic.push(fmtGeneric(e));
-                        else if (/award\.bib$/i.test(f.path)) for (const e of entries) groups.award.push(fmtGeneric(e));
-                        else if (/patent\.bib$/i.test(f.path)) for (const e of entries) groups.patent.push(fmtGeneric(e));
-                        else if (/others\.bib$/i.test(f.path)) for (const e of entries) groups.others.push(fmtGeneric(e));
-                    }
-
-                    for (const key of Object.keys(groups)) groups[key].sort((a, b) => b.y - a.y);
-
-                    const renderInto = (key) => {
-                        const el = listEls[key];
-                        const arr = groups[key];
-                        if (!arr || arr.length === 0) {
-                            el.appendChild(makeLi(`<span class="pubMeta">—</span><span class="pubMeta">No entries</span>`, ""));
-                            return;
-                        }
-                        for (const it of arr) el.appendChild(makeLi(it.html, it.id));
-                    };
-
-                    renderInto("journal");
-                    renderInto("conference");
-                    renderInto("sympoum");
-                    renderInto("domestic");
-                    renderInto("award");
-                    renderInto("patent");
-                    renderInto("others");
-
-                    statusEl.textContent = `Loaded ${fetched.length} file(s)` + (failures.length ? `, failed ${failures.length}.` : ".");
-                    if (failures.length) {
-                        errorEl.style.display = "block";
-                        errorEl.textContent = failures.map(x => `${x.path}: ${x.err}`).join(" / ");
-                    }
-                }
-
-                loadAllPublications().catch((e) => {
-                    statusEl.textContent = "Failed.";
-                    errorEl.style.display = "block";
-                    errorEl.textContent = "JS exception / " + String(e);
-                    try { console.error(e); } catch { }
-                });
-            }
-
-            if (document.readyState === "loading") {
-                document.addEventListener("DOMContentLoaded", initPubs);
-            } else {
-                initPubs();
-            }
-        })();
-    </script>
+        <!-- ハイライト（受賞）は要望がなかったのでそのまま残しています -->
+        <div class="box">
+          <div class="label" data-i18n="box_hi_label">ハイライト</div>
+          <div class="value" data-i18n="box_hi_value">LAK '25 Best Short Paper Award</div>
+          <div class="muted" style="margin-top:6px" data-i18n="box_hi_meta">2025 · Learning Analytics & Knowledge</div>
+        </div>
+
+        <div class="box">
+          <div class="label" data-i18n="box_contact_label">連絡</div>
+          <div class="value mono">yamaguchi-s(at sign)hiroshima-cu.ac.jp</div>
+          <div class="muted" style="margin-top:6px" data-i18n="box_contact_meta">Japan</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="sectionHead">
+      <h2 data-i18n="about_h2">概要</h2>
+      <div class="hint" data-i18n="about_hint">短く・強く</div>
+    </div>
+
+    <div class="item">
+      <div class="title">
+        <div data-i18n="about_title">Bio</div>
+        <span class="badge"><span data-i18n="updated">更新</span> <span id="updatedDate"></span></span>
+      </div>
+
+      <p data-i18n="bio_p">
+        2020年大阪大学工学部電子情報工学科卒業，2022年同大学院情報科学研究科博士前期課程修了，2025年同博士後期課程修了（博士（情報科学））．
+        2022–2025年日本学術振興会特別研究員（DC1）．2024年4月〜9月，コペンハーゲン大学客員研究員（JSPS 若手研究者海外挑戦プログラム）．
+        2025年4月より広島市立大学大学院情報科学研究科 助教．モバイルコンピューティング，センシングに関する研究に従事．
+      </p>
+
+      <div class="meta">
+        <span data-i18n="bio_interest">所属：広島市立大学 大学院情報科学研究科</span>
+        <span>•</span>
+        <a href="./cv.pdf" data-i18n="bio_cv">履歴書（PDF）</a>
+        <a href="https://orcid.org/0000-0002-6418-3964" target="_blank" rel="noreferrer">ORCID</a>
+        <a href="#contact" data-i18n="bio_contact">連絡</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="pubs">
+    <div class="sectionHead">
+      <h2 data-i18n="pubs_h2">業績</h2>
+      <div class="hint" data-i18n="pubs_hint">./publication/*.bib から自動生成</div>
+    </div>
+
+    <div class="item">
+      <div class="title">
+        <div>Publications</div>
+      </div>
+
+      <p class="monoSmall" id="pubStatus">Loading…</p>
+
+      <div class="pubGroup">
+        <h3>Journal</h3>
+        <ol class="pubList" id="pub-journal"></ol>
+      </div>
+
+      <div class="pubGroup">
+        <h3>Conference</h3>
+        <ol class="pubList" id="pub-conference"></ol>
+      </div>
+
+      <div class="pubGroup">
+        <h3>Symposium</h3>
+        <ol class="pubList" id="pub-symposium"></ol>
+      </div>
+
+      <div class="pubGroup">
+        <h3>Domestic</h3>
+        <ol class="pubList" id="pub-domestic"></ol>
+      </div>
+
+      <!-- ★変更：ここに id を付けてナビから飛べるように -->
+      <div class="pubGroup" id="pub-awards">
+        <h3>Award</h3>
+        <ol class="pubList" id="pub-award"></ol>
+      </div>
+
+      <div class="pubGroup">
+        <h3>Patent</h3>
+        <ol class="pubList" id="pub-patent"></ol>
+      </div>
+
+      <div class="pubGroup">
+        <h3>Others</h3>
+        <ol class="pubList" id="pub-others"></ol>
+      </div>
+
+      <p class="pubError" id="pubError" style="display:none;"></p>
+    </div>
+  </section>
+
+  <section id="career">
+    <div class="sectionHead">
+      <h2 data-i18n="career_h2">経歴</h2>
+      <div class="hint" data-i18n="career_hint">主要な所属・活動</div>
+    </div>
+
+    <div class="item">
+      <div class="title">
+        <div data-i18n="career_title">Timeline</div>
+      </div>
+
+      <div class="cols">
+        <div>
+          <div class="label" data-i18n="career_edu">学歴・職歴</div>
+          <ul class="clean" data-i18n="career_edu_list">
+            <li>2025.04–　広島市立大学 大学院情報科学研究科 助教</li>
+            <li>2022.04–2025.03　大阪大学大学院情報科学研究科 博士後期課程</li>
+            <li>2022.04–2025.03　日本学術振興会特別研究員（DC1）</li>
+            <li>2024.04–2024.09　コペンハーゲン大学 客員研究員（JSPS 若手研究者海外挑戦プログラム）</li>
+            <li>2022.04–2023.03　京都女子高等学校 非常勤講師（情報I）</li>
+            <li>2021.05–2022.03　シスメックス株式会社 学生研究員</li>
+            <li>2022.03　大阪大学大学院情報科学研究科 博士前期課程 修了</li>
+            <li>2020.03　大阪大学工学部電子情報工学科 卒業</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="label" data-i18n="career_service">学会活動・諸活動</div>
+          <ul class="clean" data-i18n="career_service_list">
+            <li>2023.06　大学教育学会 第45回大会 運営補助</li>
+            <li>2021.03　情報処理学会 第83回全国大会 運営補助</li>
+            <li>2020.06　情報処理学会 DICOMO2020 シンポジウム 運営補助</li>
+            <li>2021.12–　大阪大学SEEDSプログラム ティーチングアシスタント（TA）</li>
+            <li>2017.06–　大阪大学工学部公式ブログ「阪大工学部の散歩道」執筆担当</li>
+            <li>2023.04–2023.09　確率統計 ティーチングフェロー（TF）（2023年度春・夏学期）</li>
+            <li>2022.04–2022.09　確率統計 ティーチングフェロー（TF）（2022年度春・夏学期）</li>
+          </ul>
+
+          <div class="label" style="margin-top:12px" data-i18n="career_qual">資格等</div>
+          <ul class="clean" data-i18n="career_qual_list">
+            <li>2024.03　高度副プログラム 未来の大学教員養成プログラム 修了</li>
+            <li>2022.03　高等学校教諭一種免許状（数学・情報）取得</li>
+            <li>2021.06　TOEIC Listening &amp; Reading 815点</li>
+            <li>2019.03　enPiT-Security（SecCap 8）修了</li>
+            <li>2017.11　普通自動車運転免許（AT限定）取得</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ★削除：べた打ちの受賞歴セクション（section id="awards"）は完全に消しました -->
+
+  <section id="projects">
+    <div class="sectionHead">
+      <h2 data-i18n="projects_h2">プロジェクト</h2>
+      <div class="hint" data-i18n="projects_hint">研究の“実体”を見せる（必要に応じて追加）</div>
+    </div>
+
+    <div class="item">
+      <div class="title">
+        <div data-i18n="proj_name">（例）Wi-Fiセンシング × AR</div>
+      </div>
+
+      <p data-i18n="proj_p">
+        現実環境でのロバスト性を意識して、Wi-Fiセンシングと自己位置推定／AR応用をつなぐシステム・評価を設計しています。
+        実装・データ・再現性を意識した公開を目指しています。
+      </p>
+
+      <div class="meta">
+        <a href="#" target="_blank" rel="noreferrer" data-i18n="proj_repo">Repository</a>
+        <a href="#" target="_blank" rel="noreferrer" data-i18n="proj_demo">Demo</a>
+        <span class="muted" data-i18n="proj_tech">Tech: Python / ROS 2 / Embedded</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="sectionHead">
+      <h2 data-i18n="contact_h2">連絡先</h2>
+      <div class="hint" data-i18n="contact_hint">返信しやすい情報だけ</div>
+    </div>
+
+    <div class="item">
+      <div class="title">
+        <div data-i18n="contact_title">Get in touch</div>
+      </div>
+
+      <p>
+        <span data-i18n="contact_email">Email:</span>
+        <span class="mono">yamaguchi-s(at sign)hiroshima-cu.ac.jp</span><br />
+        <span data-i18n="contact_affil">所属:</span>
+        <span data-i18n="contact_affil_value">広島市立大学 大学院情報科学研究科 モニタリングネットワーク研究グループ</span><br />
+      </p>
+
+      <div class="meta">
+        <a href="mailto:yamaguchi-s@hiroshima-cu.ac.jp" data-i18n="contact_mail">Mail</a>
+        <a href="https://orcid.org/0000-0002-6418-3964" target="_blank" rel="noreferrer">ORCID</a>
+        <a href="#" target="_blank" rel="noreferrer" data-i18n="contact_scholar">Scholar</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>© <span id="year"></span> Shunpei Yamaguchi. All rights reserved.</div>
+    <div class="mono">Last build: <span id="build"></span></div>
+  </footer>
+</main>
+
+<script>
+  // Theme
+  const root = document.documentElement;
+  const themeBtn = document.getElementById('themeBtn');
+  const themeMeta = document.getElementById('themeColorMeta');
+
+  function prefersLightNow() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  }
+  function currentThemeResolved() {
+    const mode = root.getAttribute('data-theme') || 'auto';
+    if (mode === 'auto') return prefersLightNow() ? 'light' : 'dark';
+    return mode;
+  }
+  function updateThemeColorMeta() {
+    themeMeta.setAttribute('content', currentThemeResolved() === 'light' ? '#f6f7fb' : '#0b0f14');
+  }
+  function setThemeMode(mode) {
+    root.setAttribute('data-theme', mode);
+    localStorage.setItem('theme_mode', mode);
+    themeBtn.textContent = mode === 'auto' ? '🌓 Auto' : (mode === 'light' ? '☀️ Light' : '🌙 Dark');
+    updateThemeColorMeta();
+  }
+
+  setThemeMode(localStorage.getItem('theme_mode') || 'auto');
+
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
+      if ((root.getAttribute('data-theme') || 'auto') === 'auto') updateThemeColorMeta();
+    });
+  }
+
+  themeBtn.addEventListener('click', () => {
+    const cur = root.getAttribute('data-theme') || 'auto';
+    const next = (cur === 'auto') ? 'dark' : (cur === 'dark' ? 'light' : 'auto');
+    setThemeMode(next);
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('build').textContent = new Date().toISOString().slice(0, 10) + " " + new Date().toTimeString().slice(0, 8);
+  document.getElementById('updatedDate').textContent = new Date().toISOString().slice(0, 10);
+</script>
+
+<!-- Language (JA/EN) -->
+<script>
+(() => {
+  const langBtn = document.getElementById("langBtn");
+  const I18N = {
+    en: {
+      brand_sub: "Hiroshima City University · Graduate School of Information Sciences / Assistant Professor",
+      nav_about: "About",
+      nav_pubs: "Publications",
+      nav_career: "Career",
+      nav_awards: "Awards",
+      nav_projects: "Projects",
+      nav_contact: "Contact",
+      btn_cv: "CV",
+      hero_line1: "Building robust",
+      hero_focus: "mobile sensing",
+      hero_line2: " for real-world environments.",
+      hero_lead: "My research focuses on mobile computing and sensing, including Wi-Fi sensing, localization, SLAM, and AR systems designed and evaluated for real deployments.",
+      kw_mobile: "Mobile computing",
+      kw_sensing: "Sensing",
+      kw_wifi: "Wi-Fi sensing",
+      kw_loc: "Localization",
+      kw_slam: "SLAM / AR",
+      link_scholar: "Google Scholar",
+      link_researchmap: "Researchmap",
+      box_now_label: "Now",
+      box_now_value: "Assistant Professor / Hiroshima City University (since Apr 2025)",
+      box_now_work: "Working on: <span class=\"mono\">mobile computing · sensing</span>",
+      box_hi_label: "Highlight",
+      box_hi_value: "LAK '25 Best Short Paper Award",
+      box_hi_meta: "2025 · Learning Analytics & Knowledge",
+      box_contact_label: "Contact",
+      box_contact_meta: "Japan",
+      about_h2: "About",
+      about_hint: "Short and strong",
+      about_title: "Bio",
+      updated: "Updated",
+      bio_p: "Shunpei Yamaguchi received B.E., M.E., and Ph.D. degrees from Osaka University in 2020, 2022, and 2025, respectively. He was a Research Fellow (DC1) of JSPS from 2022 to 2025, and a visiting scholar at the University of Copenhagen (Apr–Sep 2024) supported by the JSPS Overseas Challenge Program for Young Researchers. Since April 2025, he has been an assistant professor at Hiroshima City University. His research interests include mobile computing and sensing.",
+      bio_interest: "Affiliation: Hiroshima City University · Graduate School of Information Sciences",
+      bio_cv: "CV (PDF)",
+      bio_contact: "Contact",
+      pubs_h2: "Publications",
+      pubs_hint: "Auto-generated from ./publication/*.bib",
+      career_h2: "Career",
+      career_hint: "Selected positions and services",
+      career_title: "Timeline",
+      career_edu: "Education & positions",
+      career_edu_list: "<li>Apr 2025– : Assistant Professor, Hiroshima City University</li><li>Apr 2022–Mar 2025 : Ph.D. program, Graduate School of Information Science and Technology, Osaka University</li><li>Apr 2022–Mar 2025 : JSPS Research Fellow (DC1)</li><li>Apr 2024–Sep 2024 : Visiting Scholar, University of Copenhagen (JSPS Overseas Challenge Program for Young Researchers)</li><li>Apr 2022–Mar 2023 : Part-time lecturer (Information I), Kyoto Women's High School</li><li>May 2021–Mar 2022 : Student researcher, Sysmex Corporation</li><li>Mar 2022 : M.E., Osaka University</li><li>Mar 2020 : B.E., Osaka University</li>",
+      career_service: "Service & activities",
+      career_service_list: "<li>Jun 2023: Staff, JACUE 45th Annual Meeting</li><li>Mar 2021: Staff, IPSJ 83rd National Convention</li><li>Jun 2020: Staff, IPSJ DICOMO 2020 Symposium</li><li>Since Dec 2021: TA, Osaka University SEEDS program</li><li>Since Jun 2017: Writer, Osaka University engineering blog</li><li>Apr–Sep 2023: Teaching Fellow, Probability & Statistics</li><li>Apr–Sep 2022: Teaching Fellow, Probability & Statistics</li>",
+      career_qual: "Qualifications",
+      career_qual_list: "<li>Mar 2024: Completed Advanced Sub-Program (Faculty Development)</li><li>Mar 2022: Secondary school teaching license (Math/Information)</li><li>Jun 2021: TOEIC L&amp;R 815</li><li>Mar 2019: Completed enPiT-Security (SecCap 8)</li><li>Nov 2017: Driver’s license (AT)</li>",
+      projects_h2: "Projects",
+      projects_hint: "Add as needed",
+      proj_name: "(Example) Wi-Fi sensing × AR",
+      proj_p: "I build and evaluate systems that connect Wi-Fi sensing with localization and AR applications, aiming for robustness in real environments and reproducible artifacts (code/data/experiments).",
+      proj_repo: "Repository",
+      proj_demo: "Demo",
+      proj_tech: "Tech: Python / ROS 2 / Embedded",
+      contact_h2: "Contact",
+      contact_hint: "Only what makes replying easy",
+      contact_title: "Get in touch",
+      contact_email: "Email:",
+      contact_affil: "Affiliation:",
+      contact_affil_value: "Hiroshima City University, Graduate School of Information Sciences",
+      contact_mail: "Mail",
+      contact_scholar: "Scholar"
+    },
+    ja: {
+      // Japanese is the in-page original; keep minimal
+    }
+  };
+
+  function applyLang(lang) {
+    root.setAttribute("data-lang", lang);
+    root.setAttribute("lang", lang === "en" ? "en" : "ja");
+    langBtn.textContent = (lang === "en") ? "🌐 English" : "🌐 日本語";
+
+    const dict = I18N[lang] || {};
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      if (!key) return;
+
+      if (!el.hasAttribute("data-i18n-ja")) el.setAttribute("data-i18n-ja", el.innerHTML);
+
+      if (lang === "en") {
+        if (dict[key] != null) el.innerHTML = dict[key];
+      } else {
+        el.innerHTML = el.getAttribute("data-i18n-ja") || el.innerHTML;
+      }
+    });
+
+    localStorage.setItem("site_lang", lang);
+  }
+
+  const saved = localStorage.getItem("site_lang");
+  applyLang(saved === "en" ? "en" : "ja");
+
+  langBtn.addEventListener("click", () => {
+    const cur = root.getAttribute("data-lang") || "ja";
+    applyLang(cur === "ja" ? "en" : "ja");
+  });
+})();
+</script>
+
+<!-- Publications (BibTeX) -->
+<script>
+(() => {
+  const PUB_FILES = [
+    "./publication/journal.bib",
+    "./publication/conference.bib",
+    "./publication/symposium.bib",
+    "./publication/domestic.bib",
+    "./publication/award.bib",   // ★残す（BibTeXからの受賞は残す）
+    "./publication/patent.bib",
+    "./publication/oth  ];
+
+  const statusEl = document.getElementById("pubStatus");
+  const errorEl = document.getElementById("pubError");
+
+  const listEls = {
+    journal: document.getElementById("pub-journal"),
+    conference: document.getElementById("pub-conference"),
+    symposium: document.getElementById("pub-symposium"),
+    domestic: document.getElementById("pub-domestic"),
+    award: document.getElementById("pub-award"),     // ★残す
+    patent: document.getElementById("pub-patent"),
+    others: document.getElementBub-others"),
+  };
+
+  if (!statusEl || !errorEl || Object.values(listEls).some(v => !v)) return;
+
+  function escapeHtml(s) {
+    return (s ?? "")
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+  function typographicFix(s) { return (s ?? "").replaceAll("--", "–"); }
+  function latexLightNormalize(s) {
+    let x = (s ?? "").trim();
+    if (!x) return x;
+    x = x.replaceAll("~", " ");
+    x =.replace(/\s+/g, " ").trim();
+    return x;
+  }
+  function fmtAuthors(s) {
+    const x = latexLightNormalize(s);
+    return typographicFix(x).replace(/\s+and\s+/gi, ", ");
+  }
+  function stripComments(s) {
+    const lines = s.split(/\r?\n/);
+    const out = [];
+    for (const line of lines) {
+      let acc = "";
+      let escaped = false;
+      for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === "\\" && !escaped) { escaped = true; acc += ch; continue; }
+        if (ch === "%" && !escaped) break;
+        escaped = false;
+        acc += ch;
+      }
+      out.push(acc);
+    }
+    return out.join("\n");
+  }
+  function yearNum(s) {
+    const m = (s || "").match(/\d{4}/);
+    return m ? parseInt(m[0], 10) : -1;
+  }
+  function makeLi(html, id) {
+    const li = document.createElement("li");
+    if (id) li.id = id;
+    li.innerHTML = html;
+    return li;
+  }
+  function stripOuterBraces(v) {
+    let s = (v ?? "").trim();
+    if (!s) return s;
+    if (s.startsWith('"') && s.endsWith('"')) return s.slice(1, -1).trim();
+    if (s.startsWith("{") && s.endsWith("}")) {
+      let depth = 0;
+      for (let i = 0; i < s.length; i++) {
+        const ch = s[i];
+        if (ch === "{") depth++;
+        else if (ch === "}") depth--;
+        if (depth === 0 && i !== s.length - 1) return s;
+      }
+      return s.slice(1, -1).trim();
+    }
+    return s;
+  }
+  function splitTopLevel(s, sepChar) {
+    const parts = [];
+    let buf = "";
+    let depth = 0;
+    let inQuote = false;
+    let esc = false;
+    for (let i = 0; i < s.length; i++) {
+      const ch = s[i];
+      if (esc) { buf += ch; esc = false; continue; }
+      if (ch === "\\") { buf += ch; esc = true; continue; }
+      if (ch === '"') { inQuote = !inQuote; buf += ch; continue; }
+
+      if (!inQuote) {
+        if (ch === "{") depth++;
+        else if (ch === "}") depth = Math.max(0, depth - 1);
+        if (depth === 0 && ch === sepChar) { parts.push(buf); buf = ""; continue; }
+      }
+      buf += ch;
+    }
+    if (buf.trim() !== "") parts.push(buf);
+    return parts;
+  }
+  function parseBibTeX(text) {
+    const t = stripComments(text || "");
+    const entries = [];
+    let i = 0;
+
+    while (i < t.length) {
+      const at = t.indexOf("@", i);
+      if (at === -1) break;
+
+      const brace = t.indexOf("{", at);
+      if (brace === -1) break;
+
+      const type = t.slice(at + 1, brace).trim().toLowerCase();
+
+      let depth = 0;
+      let j = brace;
+      for (; j < t.length; j++) {
+        const ch = t[j];
+        if (ch === "{") depth++;
+        else if (ch === "}") depth--;
+        if (depth === 0) break;
+      }
+      if (depth !== 0) break;
+
+      const bodyAll = t.slice(brace + 1, j).trim();
+      const comma = bodyAll.indexOf(",");
+      if (comma === -1) { i = j + 1; continue; }
+
+      const key = bodyAll.slice(0, comma).trim();
+      const body = bodyAll.slice(comma + 1).trim();
+
+      const fields = {};
+      const chunks = splitTopLevel(body, ",");
+      for (const chunkRaw of chunks) {
+        const chunk = chunkRaw.trim();
+        if (!chunk) continue;
+        const eq = chunk.indexOf("=");
+        if (eq === -1) continue;
+        const name = chunk.slice(0, eq).trim().toLowerCase();
+        let val = chunk.slice(eq + 1).trim();
+        val = stripOuterBraces(val);
+        fields[name] = val;
+      }
+
+      entries.push({ type, key, fields });
+      i = j + 1;
+    }
+    return entries;
+  }
+
+  function fieldAny(f, keys) {
+    for (const k of keys) {
+      const v = f[k];
+      if (v && String(v).trim() !== "") return String(v).trim();
+    }
+    return "";
+  }
+
+  function linkPartFor(f) {
+    const url = latexLightNormalize(fieldAny(f, ["url"]));
+    const doi = latexLightNormalize(fieldAny(f, ["doi"]));
+    if (url) return `<span class="pubMeta"><a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">Link</a></span>`;
+    if (doi) return `<span class="pubMeta"><a href="https://doi.org/${escapeHtml(doi)}" target="_blank" rel="noreferrer">DOI</a></span>`;
+    return "";
+  }
+
+  function notePartFor(f) {
+    const noteRaw = latexLightNormalize(fieldAny(f, ["note"]));
+    const note = typographicFix(noteRaw);
+    if (!note) return "";
+    if (/peer\s*-?\s*review/i.test(note)) return "";
+    return ` (${escapeHtml(note)})`;
+  }
+
+  function fmtJournal(e) {
+    const f = e.fields;
+    const authors = fmtAuthors(fieldAny(f, ["author", "authors"]));
+    const title = typographicFix(latexLightNormalize(stripOuterBraces(fieldAny(f, ["title"]))));
+    const venue = typographicFix(latexLightNormalize(fieldAny(f, ["journal", "booktitle"])));
+    const vol = typographicFix(latexLightNormalize(fieldAny(f, ["volume", "vol"])));
+    const no = typographicFix(latexLightNormalize(fieldAny(f, ["number", "no"])));
+    const pages = typographicFix(latexLightNormalize(fieldAny(f, ["pages", "page"])));
+    const year = typographicFix(latexLightNormalize(fieldAny(f, ["year", "date"])));
+
+    const noPart = (vol && no) ? `, no.&nbsp;${escapeHtml(no)}` : "";
+    const notePart = notePartFor(f);
+    const linkPart = linkPartFor(f);
+
+    const html =
+      `${escapeHtml(authors)}` +
+      (title ? `, “${escapeHtml(title)},”` : ",") +
+      (venue ? ` <i>${escapeHtml(venue)}</i>` : "") +
+      (vol ? `, vol.&nbsp;${escapeHtml(vol)}` : "") +
+      noPart +
+      (pages ? `, pp.&nbsp;${escapeHtml(pages)}` : "") +
+      (year ? `, ${escapeHtml(year)}` : "") +
+      `${notePart}. ` +
+      `${linkPart}`;
+
+    return { html, id: e.key || "", y: yearNum(year) };
+  }
+
+  function fmtConference(e) {
+    const f = e.fields;
+    const authors = fmtAuthors(fieldAny(f, ["author", "ars"]));
+    const title = typographicFix(latexLightNormalize(stripOuterBraces(fieldAny(f, ["title"]))));
+    const venue = typographicFix(latexLightNormalize(fieldAny(f, ["booktitle", "journal"])));
+    const pages = typographicFix(latexLightNormalize(fieldAny(f, ["pages", "page"])));
+    const year = typographicFix(latexLightNormalize(fieldAny(f, ["year", "date"])));
+
+    const notePart = notePartFor(f);
+    const linkPart = linkPartFor(f);
+
+    const html =
+      `${escapeHtml(authors)}` +
+      (title ? `, “${escapeHtml(title)},”` : ",") +
+      (venue ? ` <i>${escapeHtml(venue)}</i>` : "") +
+      (pages ? `, pp.&nbsp;${escapeHtml(pages)}` : "") +
+      (year ? `, ${escapeHtml(year)}` : "") +
+      `${notePart}. ` +
+      `${linkPart}`;
+
+    return { html, id: e.key || "", y: yearNum(year) };
+  }
+
+  function fmtGeneric(e) {
+    const f = e.fields;
+    const authors = fmtAuthors(fieldAny(f, ["author", "authors"]));
+    const title = typographicFix(latexLightNormalize(stripOuterBraces(fieldAny(f, ["titl)));
+    const where = typographicFix(latexLightNormalize(fieldAny(f, ["howpublished", "booktitle", "journal"])));
+    const year = typographicFix(latexLightNormalize(fieldAny(f, ["year", "date"])));
+
+    const notePart = notePartFor(f);
+    const linkPart = linkPartFor(f);
+
+    const html =
+      `${escapeHtml(authors)}` +
+      (title ? `, “${escapeHtml(title)}”` : "") +
+      (where ? `, ${escapeHtml(where)}` : "") +
+      (year ? `, ${escapeHtml(year)}` : "") +
+      `${notePart}. ` +
+      `${linkP`;
+
+    return { html, id: e.key || "", y: yearNum(year) };
+  }
+
+  async function loadAllPublications() {
+    statusEl.textContent = "Loading…";
+    errorEl.style.display = "none";
+    for (const k of Object.keys(listEls)) listEls[k].innerHTML = "";
+
+    const fetched = [];
+    const failures = [];
+
+    for (const path of PUB_FILES) {
+      try {
+        const r = await fetch(path, { cache: "no-store" });
+        if (!r.ok) throw new Error(`${r.status} ${r.statusText}`);
+        fetched.push({ path, text:wait r.text() });
+      } catch (e) {
+        failures.push({ path, err: String(e) });
+      }
+    }
+
+    const groups = { journal: [], conference: [], symposium: [], domestic: [], award: [], patent: [], others: [] };
+
+    for (const f of fetched) {
+      const entries = parseBibTeX(f.text);
+
+      if (/journal\.bib$/i.test(f.path)) for (const e of entries) groups.journal.push(fmtJournal(e));
+      else if (/conference\.bib$/i.test(f.path)) for (const e of entries) groups.conference.push(fmtConference(e));
+      else if (/symposium\.bib$/i.test(f.path)) for (const e of entries) groups.symposium.push(fmtGeneric(e));
+      else if (/domestic\.bib$/i.test(f.path)) for (const e of entries) groups.domestic.push(fmtGeneric(e));
+      else if (/award\.bib$/i.test(f.path)) for (const e of entries) groups.award.push(fmtGeneric(e));
+      else if (/patent\.bib$/i.test(f.path)) for (const e of entries) groups.patent.push(fmtGeneric(e));
+      else if (/others\.bib$/i.test(f.path)) for (const e of entries) groups.others.push(fmtGeneric(e));
+    }
+
+    for (const key of Object.keys(groups)) groups[key].sort((a, b) => b.y - a.y);
+
+    const renderInto = (key) => {
+      const el = listEls[key];
+      const arr = groups[key];
+      if (!arr || arr.length === 0) {
+        el.appendChild(makeLi(`<span class="pubMeta">—</span><span class="pubMeta">No entries</span>`, ""));
+        return;
+      }
+      for (const it of arr) el.appendChild(makeLi(it.html, it.id));
+    };
+
+    renderInto("journal");
+    renderInto("conference");   renderInto("symposium");
+    renderInto("domestic");
+    renderInto("award");
+    renderInto("patent");
+    renderInto("others");
+
+    statusEl.textContent = `Loaded ${fetched.length} file(s)` + (failures.length ? `, failed ${failures.length}.` : ".");
+
+    if (failures.length) {
+      errorEl.style.display = "block";
+      errorEl.textContent = failures.map(x => `${x.path}: ${x.err}`).join(" / ");
+    }
+  }
+
+  loadAllPublications().catch((e) => {
+    statusEl.textContent = "Failed.";
+    errorEl.style.display = "block";
+    errorEl.textContent = "JS exception / " + String(e);
+    try { console.error(e); } catch {}
+  });
+})();
+</script>
+
 </body>
-
 </html>
 
