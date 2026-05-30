@@ -252,6 +252,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .hero .card {
+                min-height: 335px;
+            }
+
             .brand,
             .right {
                 min-width: auto;
@@ -409,6 +413,12 @@
             border-radius: var(--radius);
             background: var(--panel);
             padding: 16px;
+        }
+
+        @media (max-width:880px) {
+            #career .item {
+                min-height: 1068px;
+            }
         }
 
         .title {
