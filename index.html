@@ -969,7 +969,31 @@
                 }
             };
 
-            function applyLang(lang) {
+            const LOCK_SELECTORS = [
+                "nav .chip",
+                ".right > .btn",
+                ".right > .chip",
+                ".hero .card",
+                ".mini",
+                ".mini .box",
+                "#career .item",
+                "#pubs .item",
+                "#research .item",
+                "#contact .item"
+            ];
+
+            function lockedElements() {
+                return LOCK_SELECTORS.flatMap(selector => Array.from(document.querySelectorAll(selector)));
+            }
+
+            function clearLanguageLocks() {
+                lockedElements().forEach(el => {
+                    el.style.width = "";
+                    el.style.minHeight = "";
+                });
+            }
+
+            function renderLang(lang, persist) {
                 root.setAttribute("data-lang", lang);
                 root.setAttribute("lang", lang === "en" ? "en" : "ja");
                 langBtn.textContent = (lang === "en") ? "🌐 English" : "🌐 日本語";
@@ -988,15 +1012,60 @@
                     }
                 });
 
-                localStorage.setItem("site_lang", lang);
+                if (persist) localStorage.setItem("site_lang", lang);
+            }
+
+            function measureLanguageFrames(lang) {
+                renderLang(lang, false);
+                return lockedElements().map(el => {
+                    const rect = el.getBoundingClientRect();
+                    return {
+                        width: Math.ceil(rect.width),
+                        height: Math.ceil(rect.height)
+                    };
+                });
+            }
+
+            function lockLanguageFrames(lang) {
+                const y = window.scrollY;
+                clearLanguageLocks();
+
+                const ja = measureLanguageFrames("ja");
+                const en = measureLanguageFrames("en");
+                renderLang(lang, false);
+
+                lockedElements().forEach((el, i) => {
+                    const width = Math.max(ja[i]?.width || 0, en[i]?.width || 0);
+                    const height = Math.max(ja[i]?.height || 0, en[i]?.height || 0);
+                    if (width > 0) el.style.width = width + "px";
+                    if (height > 0) el.style.minHeight = height + "px";
+                });
+
+                window.scrollTo(window.scrollX, y);
+            }
+
+            function applyLang(lang) {
+                renderLang(lang, true);
             }
 
             const saved = localStorage.getItem("site_lang");
-            applyLang(saved === "en" ? "en" : "ja");
+            const initialLang = saved === "en" ? "en" : "ja";
+            lockLanguageFrames(initialLang);
+            applyLang(initialLang);
 
             langBtn.addEventListener("click", () => {
                 const cur = root.getAttribute("data-lang") || "ja";
                 applyLang(cur === "ja" ? "en" : "ja");
+            });
+
+            let resizeTimer = 0;
+            window.addEventListener("resize", () => {
+                window.clearTimeout(resizeTimer);
+                resizeTimer = window.setTimeout(() => {
+                    const lang = root.getAttribute("data-lang") || "ja";
+                    lockLanguageFrames(lang);
+                    applyLang(lang);
+                }, 120);
             });
         })();
     </script>
