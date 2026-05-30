@@ -40,6 +40,19 @@
             --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
         }
 
+        html[data-theme="light"] {
+            --bg: #f6f7fb;
+            --panel: rgba(0, 0, 0, .04);
+            --text: rgba(0, 0, 0, .86);
+            --muted: rgba(0, 0, 0, .62);
+            --muted2: rgba(0, 0, 0, .45);
+            --border: rgba(0, 0, 0, .10);
+            --shadow: 0 18px 60px rgba(20, 20, 50, .12);
+            --link: rgba(0, 0, 0, .86);
+            --linkHover: #000;
+            --ring: rgba(124, 92, 255, .25);
+        }
+
         @media (prefers-color-scheme: light) {
             html[data-theme="auto"] {
                 --bg: #f6f7fb;
@@ -82,6 +95,11 @@
             color: var(--linkHover);
         }
 
+        a[href="#"],
+        [hidden] {
+            display: none !important;
+        }
+
         .wrap {
             max-width: var(--max);
             margin: 0 auto;
@@ -102,6 +120,10 @@
             html[data-theme="auto"] .top {
                 background: linear-gradient(to bottom, rgba(246, 247, 251, .90), rgba(246, 247, 251, .55));
             }
+        }
+
+        html[data-theme="light"] .top {
+            background: linear-gradient(to bottom, rgba(246, 247, 251, .90), rgba(246, 247, 251, .55));
         }
 
         .top .inner {
@@ -163,6 +185,10 @@
             html[data-theme="auto"] .chip {
                 background: rgba(0, 0, 0, .02);
             }
+        }
+
+        html[data-theme="light"] .chip {
+            background: rgba(0, 0, 0, .02);
         }
 
         .chip:hover {
@@ -242,6 +268,10 @@
             }
         }
 
+        html[data-theme="light"] .card {
+            background: linear-gradient(180deg, rgba(0, 0, 0, .03), rgba(0, 0, 0, .02));
+        }
+
         .pad {
             padding: 22px;
         }
@@ -287,6 +317,10 @@
             html[data-theme="auto"] .pill {
                 background: rgba(0, 0, 0, .02);
             }
+        }
+
+        html[data-theme="light"] .pill {
+            background: rgba(0, 0, 0, .02);
         }
 
         .mini {
@@ -502,7 +536,7 @@
             <div class="right">
                 <button class="btn" id="themeBtn" type="button" aria-label="Theme mode">🌓 Auto</button>
                 <button class="btn" id="langBtn" type="button" aria-label="Language">🌐 日本語</button>
-                <a class="chip" href="./cv.pdf" data-i18n="btn_cv">履歴書</a>
+                <a class="chip" href="./cv.pdf" data-requires-ok data-i18n="btn_cv">履歴書</a>
             </div>
         </div>
     </header>
@@ -757,6 +791,7 @@
             root.setAttribute('data-theme', mode);
             localStorage.setItem('theme_mode', mode);
             themeBtn.textContent = mode === 'auto' ? '🌓 Auto' : (mode === 'light' ? '☀️ Light' : '🌙 Dark');
+            themeBtn.setAttribute('aria-label', 'Theme mode: ' + mode);
             updateThemeColorMeta();
         }
 
@@ -776,7 +811,17 @@
 
         document.getElementById('year').textContent = new Date().getFullYear();
         document.getElementById('build').textContent = new Date().toISOString().slice(0, 10) + " " + new Date().toTimeString().slice(0, 8);
-        document.getElementById('updatedDate').textContent = new Date().toISOString().slice(0, 10);
+        const updatedDate = document.getElementById('updatedDate');
+        if (updatedDate) updatedDate.textContent = new Date().toISOString().slice(0, 10);
+
+        document.querySelectorAll('a[data-requires-ok]').forEach(async (link) => {
+            try {
+                const response = await fetch(link.href, { method: 'HEAD', cache: 'no-store' });
+                if (!response.ok) link.hidden = true;
+            } catch {
+                link.hidden = true;
+            }
+        });
     </script>
 
     <!-- Language (JA/EN) -->
@@ -886,9 +931,7 @@
                 "./publication/conference.bib",
                 "./publication/symposium.bib",
                 "./publication/domestic.bib",
-                "./publication/award.bib",
                 "./publication/patent.bib",
-                "./publication/others.bib",
             ];
 
             const statusEl = document.getElementById("pubStatus");
