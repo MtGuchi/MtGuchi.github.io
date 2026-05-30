@@ -130,7 +130,8 @@
             max-width: var(--max);
             margin: 0 auto;
             padding: 12px 18px;
-            display: flex;
+            display: grid;
+            grid-template-columns: 300px 430px 240px;
             align-items: center;
             justify-content: space-between;
             gap: 12px;
@@ -140,7 +141,9 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            min-width: 240px;
+            min-width: 0;
+            width: 300px;
+            overflow: hidden;
         }
 
         .dot {
@@ -159,6 +162,9 @@
             font-size: 12px;
             color: var(--muted);
             margin-top: -2px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         nav {
@@ -185,6 +191,7 @@
         }
 
         nav .chip {
+            flex: 0 0 98px;
             width: 98px;
         }
 
@@ -208,7 +215,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            min-width: 240px;
+            min-width: 0;
+            width: 240px;
             justify-content: flex-end;
             flex-wrap: nowrap;
         }
@@ -277,10 +285,15 @@
             .brand,
             .right {
                 min-width: auto;
+                width: auto;
             }
 
             nav {
                 display: none;
+            }
+
+            .top .inner {
+                display: flex;
             }
         }
 
