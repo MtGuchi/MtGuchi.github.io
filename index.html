@@ -164,7 +164,7 @@
         nav {
             display: flex;
             gap: 10px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             justify-content: center;
             align-items: center;
         }
@@ -179,6 +179,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            white-space: nowrap;
         }
 
         @media (prefers-color-scheme: light) {
@@ -203,7 +204,7 @@
             gap: 10px;
             min-width: 240px;
             justify-content: flex-end;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
         }
 
         .btn {
@@ -216,6 +217,7 @@
             font-size: 13px;
             cursor: pointer;
             transition: transform .18s ease, border-color .18s ease;
+            white-space: nowrap;
         }
 
         .btn:hover {
@@ -237,6 +239,12 @@
             grid-template-columns: 1.3fr .7fr;
             gap: 18px;
             align-items: stretch;
+        }
+
+        @media (min-width:881px) {
+            .hero .grid {
+                min-height: 426px;
+            }
         }
 
         @media (max-width:880px) {
@@ -295,6 +303,7 @@
             color: var(--muted);
             font-size: 15.5px;
             max-width: 66ch;
+            min-height: 4.8em;
         }
 
         .pillrow {
@@ -490,6 +499,33 @@
             font-size: 13px;
         }
 
+        .researchList {
+            display: grid;
+            gap: 12px;
+            margin-top: 12px;
+        }
+
+        .researchTopic {
+            border-top: 1px solid var(--border);
+            padding-top: 12px;
+        }
+
+        .researchTopic:first-child {
+            border-top: 0;
+            padding-top: 0;
+        }
+
+        .researchTopic h3 {
+            margin: 0 0 4px;
+            font-size: 15px;
+            line-height: 1.45;
+        }
+
+        .researchTopic p {
+            margin: 0;
+            color: var(--muted);
+        }
+
         footer {
             margin-top: 26px;
             color: var(--muted2);
@@ -529,7 +565,7 @@
             <nav aria-label="Primary">
                 <a class="chip" href="#career" data-i18n="nav_career">経歴</a>
                 <a class="chip" href="#pubs" data-i18n="nav_pubs">業績</a>
-                <a class="chip" href="#projects" data-i18n="nav_projects">プロジェクト</a>
+                <a class="chip" href="#research" data-i18n="nav_research">研究内容</a>
                 <a class="chip" href="#contact" data-i18n="nav_contact">連絡先</a>
             </nav>
 
@@ -665,7 +701,7 @@
         <section id="pubs">
             <div class="sectionHead">
                 <h2 data-i18n="pubs_h2">業績</h2>
-                <div class="hint" data-i18n="pubs_hint">./publication/*.bib から自動生成</div>
+                <div class="hint" data-i18n="pubs_hint">論文・発表・特許</div>
             </div>
 
             <div class="item">
@@ -714,26 +750,36 @@
             </div>
         </section>
 
-        <section id="projects">
+        <section id="research">
             <div class="sectionHead">
-                <h2 data-i18n="projects_h2">プロジェクト</h2>
-                <div class="hint" data-i18n="projects_hint">研究の“実体”を見せる（必要に応じて追加）</div>
+                <h2 data-i18n="research_h2">研究内容</h2>
+                <div class="hint" data-i18n="research_hint">主な関心領域</div>
             </div>
 
             <div class="item">
                 <div class="title">
-                    <div data-i18n="proj_name">（例）Wi-Fiセンシング × AR</div>
+                    <div data-i18n="research_title">Mobile Computing and Sensing</div>
                 </div>
 
-                <p data-i18n="proj_p">
-                    現実環境でのロバスト性を意識して、Wi-Fiセンシングと自己位置推定／AR応用をつなぐシステム・評価を設計しています。
-                    実装・データ・再現性を意識した公開を目指しています。
-                </p>
-
-                <div class="meta">
-                    <a href="#" target="_blank" rel="noreferrer" data-i18n="proj_repo">Repository</a>
-                    <a href="#" target="_blank" rel="noreferrer" data-i18n="proj_demo">Demo</a>
-                    <span class="muted" data-i18n="proj_tech">Tech: Python / ROS 2 / Embedded</span>
+                <div class="researchList">
+                    <div class="researchTopic">
+                        <h3 data-i18n="research_wifi_h3">Wi-Fi sensing in everyday environments</h3>
+                        <p data-i18n="research_wifi_p">
+                            生活空間や学習環境で得られる無線信号を用いて、人の行動や周辺状況を推定するセンシング手法を研究しています。
+                        </p>
+                    </div>
+                    <div class="researchTopic">
+                        <h3 data-i18n="research_loc_h3">Localization and spatial understanding</h3>
+                        <p data-i18n="research_loc_p">
+                            モバイル端末やARデバイスが現実空間を安定して理解するための自己位置推定、SLAM、評価方法に取り組んでいます。
+                        </p>
+                    </div>
+                    <div class="researchTopic">
+                        <h3 data-i18n="research_system_h3">Deployable sensing systems</h3>
+                        <p data-i18n="research_system_p">
+                            実環境で動作することを重視し、計測、実装、実験設計を組み合わせたシステム研究を進めています。
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -741,7 +787,7 @@
         <section id="contact">
             <div class="sectionHead">
                 <h2 data-i18n="contact_h2">連絡先</h2>
-                <div class="hint" data-i18n="contact_hint">返信しやすい情報だけ</div>
+                <div class="hint" data-i18n="contact_hint">所属・連絡先</div>
             </div>
 
             <div class="item">
@@ -766,7 +812,7 @@
 
         <footer>
             <div>© <span id="year"></span> Shunpei Yamaguchi. All rights reserved.</div>
-            <div class="mono">Last build: <span id="build"></span></div>
+            <div class="mono"><span data-i18n="footer_updated">Last updated</span>: <span id="build"></span></div>
         </footer>
     </main>
 
@@ -810,7 +856,7 @@
         });
 
         document.getElementById('year').textContent = new Date().getFullYear();
-        document.getElementById('build').textContent = new Date().toISOString().slice(0, 10) + " " + new Date().toTimeString().slice(0, 8);
+        document.getElementById('build').textContent = "2026-05-30";
         const updatedDate = document.getElementById('updatedDate');
         if (updatedDate) updatedDate.textContent = new Date().toISOString().slice(0, 10);
 
@@ -830,16 +876,16 @@
             const langBtn = document.getElementById("langBtn");
             const I18N = {
                 en: {
-                    brand_sub: "Hiroshima City University · Graduate School of Information Sciences / Assistant Professor",
+                    brand_sub: "Hiroshima City University / Assistant Professor",
                     nav_pubs: "Publications",
                     nav_career: "Career",
                     nav_awards: "Awards",
-                    nav_projects: "Projects",
+                    nav_research: "Research",
                     nav_contact: "Contact",
                     btn_cv: "CV",
-                    hero_line1: "Building robust",
+                    hero_line1: "Real-world",
                     hero_focus: "mobile sensing",
-                    hero_line2: " for real-world environments.",
+                    hero_line2: " systems",
                     hero_lead: "My research focuses on mobile computing and sensing, including Wi-Fi sensing, localization, SLAM, and AR systems designed and evaluated for real deployments.",
                     kw_mobile: "Mobile computing",
                     kw_sensing: "Sensing",
@@ -849,8 +895,8 @@
                     link_scholar: "Google Scholar",
                     link_researchmap: "Researchmap",
                     box_now_label: "Now",
-                    box_now_value: "Assistant Professor / Hiroshima City University (since Apr 2025)",
-                    box_now_work: "Working on: <span class=\"mono\">mobile computing, sensing</span>",
+                    box_now_value: "Assistant Professor, HCU (Apr 2025–)",
+                    box_now_work: "Research: <span class=\"mono\">mobile computing, sensing</span>",
                     box_hi_label: "Highlight",
                     box_hi_value: "LAK '25 Best Short Paper Award",
                     box_hi_meta: "2025 · Learning Analytics & Knowledge",
@@ -858,7 +904,7 @@
                     box_contact_meta: "Japan",
                     updated: "Updated",
                     pubs_h2: "Publications",
-                    pubs_hint: "Auto-generated from ./publication/*.bib",
+                    pubs_hint: "Articles, presentations, and patents",
                     career_h2: "Career",
                     career_hint: "Selected positions and services",
                     career_title: "Timeline",
@@ -870,21 +916,24 @@
                     career_service_list: "<li>Jun 2023: Staff, JACUE 45th Annual Meeting</li><li>Mar 2021: Staff, IPSJ 83rd National Convention</li><li>Jun 2020: Staff, IPSJ DICOMO 2020 Symposium</li><li>Dec 2021–Mar 2025: TA, Osaka University SEEDS program</li><li>Jun 2017–Mar 2025: Writer, Osaka University engineering blog</li><li>Apr–Sep 2023: Teaching Fellow, Probability & Statistics</li><li>Apr–Sep 2022: Teaching Fellow, Probability & Statistics</li>",
                     career_qual: "Qualifications",
                     career_qual_list: "<li>Mar 2024: Completed Advanced Sub-Program (Faculty Development)</li><li>Mar 2022: Secondary school teaching license (Math/Information)</li><li>Jun 2021: TOEIC L&amp;R 815</li><li>Mar 2019: Completed enPiT-Security (SecCap 8)</li><li>Nov 2017: Driver's license (AT)</li>",
-                    projects_h2: "Projects",
-                    projects_hint: "Add as needed",
-                    proj_name: "(Example) Wi-Fi sensing × AR",
-                    proj_p: "I build and evaluate systems that connect Wi-Fi sensing with localization and AR applications, aiming for robustness in real environments and reproducible artifacts (code/data/experiments).",
-                    proj_repo: "Repository",
-                    proj_demo: "Demo",
-                    proj_tech: "Tech: Python / ROS 2 / Embedded",
+                    research_h2: "Research",
+                    research_hint: "Selected research areas",
+                    research_title: "Mobile Computing and Sensing",
+                    research_wifi_h3: "Wi-Fi sensing in everyday environments",
+                    research_wifi_p: "I study sensing methods that use wireless signals from living and learning spaces to estimate human activity and surrounding contexts.",
+                    research_loc_h3: "Localization and spatial understanding",
+                    research_loc_p: "My work includes localization, SLAM, and evaluation methods for mobile and AR devices that need to understand real spaces reliably.",
+                    research_system_h3: "Deployable sensing systems",
+                    research_system_p: "I design systems and experiments with an emphasis on measurement, implementation, and reliable operation in real environments.",
                     contact_h2: "Contact",
-                    contact_hint: "Only what makes replying easy",
+                    contact_hint: "Affiliation and contact",
                     contact_title: "Get in touch",
                     contact_email: "Email:",
                     contact_affil: "Affiliation:",
                     contact_affil_value: "Hiroshima City University, Graduate School of Information Sciences",
                     contact_mail: "Mail",
-                    contact_scholar: "Scholar"
+                    contact_scholar: "Scholar",
+                    footer_updated: "Last updated"
                 },
                 ja: {
                     // Japanese is the in-page original; keep minimal
