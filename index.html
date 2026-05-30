@@ -167,6 +167,7 @@
             flex-wrap: nowrap;
             justify-content: center;
             align-items: center;
+            width: 430px;
         }
 
         .chip {
@@ -178,8 +179,13 @@
             transition: transform .18s ease, background .18s ease, border-color .18s ease;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             white-space: nowrap;
+        }
+
+        nav .chip {
+            width: 98px;
         }
 
         @media (prefers-color-scheme: light) {
@@ -207,6 +213,14 @@
             flex-wrap: nowrap;
         }
 
+        .right .btn {
+            width: 92px;
+        }
+
+        .right .chip {
+            width: 92px;
+        }
+
         .btn {
             appearance: none;
             border: 1px solid var(--border);
@@ -218,6 +232,10 @@
             cursor: pointer;
             transition: transform .18s ease, border-color .18s ease;
             white-space: nowrap;
+            height: 39px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .btn:hover {
@@ -338,6 +356,7 @@
 
         .mini {
             display: grid;
+            grid-template-rows: repeat(3, minmax(116px, 1fr));
             gap: 12px;
             height: 100%;
         }
