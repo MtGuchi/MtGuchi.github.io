@@ -198,7 +198,7 @@ main,
     max-width: 780px;
     margin: 24px 0 32px;
     font-family: var(--serif);
-    font-size: clamp(58px, 7.5vw, 110px);
+    font-size: clamp(52px, 6.4vw, 92px);
     font-weight: 400;
     letter-spacing: -.055em;
     line-height: .94;
@@ -336,7 +336,7 @@ main,
 .contact h2 {
     margin: 13px 0 0;
     font-family: var(--serif);
-    font-size: clamp(42px, 5.2vw, 72px);
+    font-size: clamp(36px, 4.2vw, 58px);
     font-weight: 400;
     letter-spacing: -.045em;
     line-height: 1.05;
@@ -376,7 +376,7 @@ main,
 .research-item h3 {
     margin: 0;
     font-family: var(--serif);
-    font-size: clamp(24px, 2.4vw, 34px);
+    font-size: clamp(22px, 2vw, 30px);
     font-weight: 400;
     letter-spacing: -.025em;
     line-height: 1.15;
@@ -437,7 +437,7 @@ main,
     max-width: 800px;
     margin: 0;
     font-family: var(--serif);
-    font-size: clamp(24px, 2.5vw, 35px);
+    font-size: clamp(22px, 2.1vw, 30px);
     font-weight: 400;
     letter-spacing: -.025em;
     line-height: 1.22;
@@ -537,7 +537,7 @@ main,
 .publication-year h3 {
     margin: 22px 0 0;
     font-family: var(--serif);
-    font-size: 26px;
+    font-size: 23px;
     font-style: italic;
     font-weight: 400;
 }
@@ -568,7 +568,7 @@ main,
 .publication-title {
     margin: 0;
     font-family: var(--serif);
-    font-size: 20px;
+    font-size: 18.5px;
     font-weight: 400;
     letter-spacing: -.012em;
     line-height: 1.35;
@@ -630,7 +630,7 @@ main,
     padding-top: 17px;
     border-top: 1px solid var(--ink);
     font-family: var(--serif);
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 400;
 }
 
@@ -777,7 +777,7 @@ main,
 
     .hero h1 {
         margin-top: 18px;
-        font-size: clamp(53px, 16vw, 78px);
+        font-size: clamp(44px, 13vw, 62px);
     }
 
     .portrait {
@@ -808,7 +808,7 @@ main,
 
     .section-heading h2,
     .contact h2 {
-        font-size: clamp(39px, 12vw, 57px);
+        font-size: clamp(33px, 10vw, 46px);
     }
 
     .section-heading .section-lead,
@@ -846,7 +846,7 @@ main,
     }
 
     .selected-title {
-        font-size: 23px;
+        font-size: 21px;
     }
 
     .selected-arrow {
@@ -876,7 +876,7 @@ main,
     }
 
     .publication-title {
-        font-size: 18px;
+        font-size: 17px;
     }
 
     .publication-links {
