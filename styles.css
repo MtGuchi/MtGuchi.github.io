@@ -9,8 +9,8 @@
     --white: #fbfaf7;
     --max: 1240px;
     --gutter: clamp(20px, 4vw, 64px);
-    --serif: "Iowan Old Style", "Palatino Linotype", "Yu Mincho", "Hiragino Mincho ProN", Georgia, serif;
-    --sans: "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Arial, sans-serif;
+    --serif: "Meiryo UI", Meiryo, sans-serif;
+    --sans: "Meiryo UI", Meiryo, sans-serif;
 }
 
 * {
@@ -200,7 +200,7 @@ main,
     font-family: var(--serif);
     font-size: clamp(52px, 6.4vw, 92px);
     font-weight: 400;
-    letter-spacing: -.055em;
+    letter-spacing: -.03em;
     line-height: .94;
 }
 
@@ -338,7 +338,7 @@ main,
     font-family: var(--serif);
     font-size: clamp(36px, 4.2vw, 58px);
     font-weight: 400;
-    letter-spacing: -.045em;
+    letter-spacing: -.025em;
     line-height: 1.05;
 }
 
@@ -378,7 +378,7 @@ main,
     font-family: var(--serif);
     font-size: clamp(22px, 2vw, 30px);
     font-weight: 400;
-    letter-spacing: -.025em;
+    letter-spacing: -.015em;
     line-height: 1.15;
 }
 
@@ -439,7 +439,7 @@ main,
     font-family: var(--serif);
     font-size: clamp(22px, 2.1vw, 30px);
     font-weight: 400;
-    letter-spacing: -.025em;
+    letter-spacing: -.015em;
     line-height: 1.22;
 }
 
@@ -570,7 +570,7 @@ main,
     font-family: var(--serif);
     font-size: 18.5px;
     font-weight: 400;
-    letter-spacing: -.012em;
+    letter-spacing: 0;
     line-height: 1.35;
 }
 
