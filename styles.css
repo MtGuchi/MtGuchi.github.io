@@ -14,7 +14,7 @@
     --type-display: clamp(28px, 3vw, 38px);
     --type-section: clamp(23px, 2.1vw, 28px);
     --type-item: 15px;
-    --type-body: 13px;
+    --type-body: 14px;
 }
 
 * {
@@ -31,7 +31,7 @@ body {
     color: var(--ink);
     background: var(--paper);
     font-family: var(--sans);
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
 }
@@ -122,22 +122,29 @@ html[data-lang="en"] [data-copy="en"] {
     font-size: 12px;
     font-weight: 650;
     letter-spacing: .04em;
+    transition: color .2s ease;
 }
 
 .site-nav a::after {
     content: "";
     position: absolute;
     left: 0;
-    right: 100%;
-    bottom: -1px;
-    height: 2px;
-    background: var(--ink);
-    transition: right .25s ease;
+    right: 0;
+    bottom: 13px;
+    height: 1px;
+    background: var(--muted);
+    transition: background-color .2s ease, height .2s ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+    color: var(--accent);
 }
 
 .site-nav a:hover::after,
 .site-nav a:focus-visible::after {
-    right: 0;
+    height: 2px;
+    background: var(--accent);
 }
 
 .site-nav span {
@@ -147,6 +154,20 @@ html[data-lang="en"] [data-copy="en"] {
     font-size: 11px;
     font-style: normal;
     font-weight: 400;
+}
+
+.site-nav .nav-arrow {
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    transition: transform .2s ease;
+}
+
+.site-nav a:hover .nav-arrow,
+.site-nav a:focus-visible .nav-arrow {
+    transform: translate(1px, 2px);
 }
 
 .language-switch {
@@ -225,7 +246,7 @@ main,
 
 .hero-intro p {
     margin: 0;
-    font-size: clamp(13px, 1vw, 14px);
+    font-size: clamp(14px, 1vw, 15px);
     line-height: 1.8;
 }
 
@@ -307,7 +328,7 @@ main,
 .latest-text {
     max-width: 820px;
     margin: 0;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.6;
 }
 
@@ -463,7 +484,7 @@ main,
 .selected-venue {
     margin: 10px 0 0;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.65;
 }
 
@@ -594,7 +615,7 @@ main,
 .publication-venue {
     margin: 7px 0 0;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.65;
 }
 
@@ -663,7 +684,7 @@ main,
     display: grid;
     grid-template-columns: 90px minmax(0, 1fr);
     gap: 20px;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.65;
 }
 
